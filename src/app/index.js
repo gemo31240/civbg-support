@@ -1,13 +1,14 @@
 'use strict';
 
 import MainController from './main/main.controller';
-import NavbarController from '../app/components/navbar/navbar.controller';
-import TechTreeController from '../app/components/techTree/techTree.controller';
-import NewGameController from '../app/components/dialogs/newGame.controller';
+import NavbarController from './components/navbar/navbar.controller';
+import TechTreeController from './components/techTree/techTree.controller';
+import {ArmsInfoController, ArmsDropdownDirective} from './components/armsInfo/armsInfo.controller';
+import NewGameController from './components/dialogs/newGame.controller';
 
 import Players from './services/players';
 import Tech from './services/tech';
-import Firebase from './services/firebase.js';
+import Firebase from './services/firebase';
 
 angular.module('civbgSupport', [
   'ngAnimate',
@@ -25,7 +26,9 @@ angular.module('civbgSupport', [
   .controller('MainController', MainController)
   .controller('NavbarController', NavbarController)
   .controller('TechTreeController', TechTreeController)
+  .controller('ArmsInfoController', ArmsInfoController)
   .controller('NewGameController', NewGameController)
+  .directive('armsDropdown', ArmsDropdownDirective.activate)
 
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
