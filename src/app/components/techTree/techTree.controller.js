@@ -16,6 +16,7 @@ class TechTreeController {
     if (!_.isObject(this.player.tech)) {
       this.player.tech = {};
     }
+    this.player.tech.keep = true;
   }
 
   toName(techId) {
@@ -48,6 +49,9 @@ class TechTreeController {
       .value();
     if ((level === 'one' || level === 'two') && !this.isNewtonUsed()) {
       techs.push(this.Tech[this.Tech.length - 1]);
+    }
+    if (level === 'one' && _.isEmpty(this.player.tech.one)) {
+      return _.filter(this.Tech, (tech) => tech.level === 'one' || tech.level === 'two');
     }
     return techs;
   }
