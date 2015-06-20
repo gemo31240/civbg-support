@@ -4,7 +4,7 @@
       <button type="button" class="btn btn-default dropdown-toggle" dropdown-toggle>
         <img ng-src="assets/images/arms_rank{{model}}.png" ng-if="!airforce">
         <span ng-switch="model" ng-if="airforce">
-          <span ng-switch-when="0" class="glyphicon glyphicon-ban-circle""></span>
+          <span ng-switch-when="0" class="glyphicon">&nbsp;</span>
           <img ng-switch-when="1" src="assets/images/arms_airforce.png">
         </span>
         <span class="caret"></span>
@@ -14,7 +14,7 @@
           <a href="" ng-click="updateRank(rank)"><img ng-src="assets/images/arms_rank{{rank}}.png"></a>
         </li>
         <li ng-if="airforce">
-          <a href="" ng-click="updateRank(0)"><span class="glyphicon glyphicon-ban-circle"></span></a>
+          <a href="" ng-click="updateRank(0)"><span>&nbsp;</span></a>
         </li>
         <li ng-if="airforce">
           <a href="" ng-click="updateRank(1)"><img ng-src="assets/images/arms_airforce.png" ng-if="airforce"></a>
