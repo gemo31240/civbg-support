@@ -47,12 +47,17 @@ class TechTreeController {
       .filter((tech) => tech.level === level)
       .filter((tech) => _.values(this.player.tech[level]).indexOf(tech.id) === -1)
       .value();
-    if ((level === 'one' || level === 'two') && !this.isNewtonUsed()) {
+
+    // ニュートン
+    if (level !== 'five' && !this.isNewtonUsed()) {
       techs.push(this.Tech[this.Tech.length - 1]);
     }
+
+    // 初期技術
     if (level === 'one' && _.isEmpty(this.player.tech.one)) {
       return _.filter(this.Tech, (tech) => tech.level === 'one' || tech.level === 'two');
     }
+
     return techs;
   }
 
