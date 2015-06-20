@@ -4,3 +4,12 @@ $icon-font-path: "/bower_components/bootstrap-sass-official/assets/fonts/bootstr
    sass dependencies when defined in the bower.json of your dependencies */
 // bower:scss
 // endbower
+
+.modal-lg {
+  width: 90%;
+  height: 90%;
+
+  .modal-content{
+  height: 100%;
+  }
+}

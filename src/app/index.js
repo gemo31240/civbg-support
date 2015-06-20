@@ -5,6 +5,7 @@ import NavbarController from './components/navbar/navbar.controller';
 import TechTreeController from './components/techTree/techTree.controller';
 import {ArmsInfoController, ArmsDropdownDirective} from './components/armsInfo/armsInfo.controller';
 import NewGameController from './components/dialogs/newGame.controller';
+import TechDetailController from './components/dialogs/techDetail.controller';
 
 import Players from './services/players';
 import Tech from './services/tech';
@@ -28,6 +29,7 @@ angular.module('civbgSupport', [
   .controller('TechTreeController', TechTreeController)
   .controller('ArmsInfoController', ArmsInfoController)
   .controller('NewGameController', NewGameController)
+  .controller('TechDetailController', TechDetailController)
   .directive('armsDropdown', ArmsDropdownDirective.activate)
 
   .config(function ($stateProvider, $urlRouterProvider) {

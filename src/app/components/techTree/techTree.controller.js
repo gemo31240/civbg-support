@@ -2,8 +2,9 @@
 
 export default
 class TechTreeController {
-  constructor($scope, $window, Players, Tech) {
+  constructor($scope, $window, $modal, Players, Tech) {
     this.$window = $window;
+    this.$modal = $modal;
     this.player = $scope.player;
     this.players = Players.players;
     this.Tech = Tech;
@@ -115,6 +116,19 @@ class TechTreeController {
       }
     });
   }
+
+  openDetail(techId) {
+    this.$modal.open({
+      animation: true,
+      templateUrl: 'app/components/dialogs/techDetail.html',
+      controller: 'TechDetailController',
+      controllerAs: 'ctrl',
+      size: 'lg',
+      resolve: {
+        techId: () => techId
+      }
+    });
+  }
 }
 
-TechTreeController.$inject = ['$scope', '$window', 'Players', 'Tech'];
+TechTreeController.$inject = ['$scope', '$window', '$modal', 'Players', 'Tech'];

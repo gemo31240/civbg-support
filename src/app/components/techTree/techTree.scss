@@ -44,6 +44,7 @@
           right: 4px;
           color: #cccccc;
           display: none;
+          cursor: pointer;
         }
 
         &:hover .remove-icon {
@@ -63,6 +64,7 @@
             text-align: center;
             vertical-align: middle;
             text-decoration: none;
+            cursor: help;
           }
         }
 
