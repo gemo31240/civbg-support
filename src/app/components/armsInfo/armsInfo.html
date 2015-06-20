@@ -1,52 +1,34 @@
 <div ng-controller="ArmsInfoController as ctrl" class="arms-info">
   <script type="text/ng-template" id="arms-dropdown-template.html">
-    <div class="btn-group" dropdown>
-      <button type="button" class="btn btn-default dropdown-toggle" dropdown-toggle>
-        <img ng-src="assets/images/arms_rank{{model}}.png" ng-if="!airforce">
-        <span ng-switch="model" ng-if="airforce">
-          <span ng-switch-when="0" class="glyphicon">&nbsp;</span>
-          <img ng-switch-when="1" src="assets/images/arms_airforce.png">
-        </span>
-        <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        <li ng-repeat="rank in ranks" ng-if="!airforce">
-          <a href="" ng-click="updateRank(rank)"><img ng-src="assets/images/arms_rank{{rank}}.png"></a>
-        </li>
-        <li ng-if="airforce">
-          <a href="" ng-click="updateRank(0)"><span>&nbsp;</span></a>
-        </li>
-        <li ng-if="airforce">
-          <a href="" ng-click="updateRank(1)"><img ng-src="assets/images/arms_airforce.png" ng-if="airforce"></a>
-        </li>
-      </ul>
-    </div>
+    <img ng-src="assets/images/arms_rank{{model}}.png" ng-if="!airforce">
+    <span class="airforce-none" ng-if="airforce && model === 0"></span>
+    <img src="assets/images/arms_airforce.png" ng-if="airforce && model === 1">
   </script>
 
   <div class="arms-wrapper sword">
     <span class="arms-icon">歩</span>
-    <span class="arms-rank-select">
+    <span class="arms-rank-select img-thumbnail">
       <arms-dropdown player="player" ng-model="player.arms.sword"></arms-dropdown>
     </span>
   </div>
 
   <div class="arms-wrapper cannon">
     <span class="arms-icon">砲</span>
-    <span class="arms-rank-select">
+    <span class="arms-rank-select img-thumbnail">
       <arms-dropdown player="player" ng-model="player.arms.cannon"></arms-dropdown>
     </span>
   </div>
 
   <div class="arms-wrapper cavalry">
     <span class="arms-icon">騎</span>
-    <span class="arms-rank-select">
+    <span class="arms-rank-select img-thumbnail">
       <arms-dropdown player="player" ng-model="player.arms.cavalry"></arms-dropdown>
     </span>
   </div>
 
   <div class="arms-wrapper airforce">
     <span class="arms-icon">航</span>
-    <span class="arms-rank-select">
+    <span class="arms-rank-select img-thumbnail">
       <arms-dropdown player="player" ng-model="player.arms.airforce" airforce="true"></arms-dropdown>
     </span>
   </div>

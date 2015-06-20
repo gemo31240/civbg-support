@@ -22,16 +22,6 @@
     font-size: 1.8rem;
   }
 
-  .dropdown-toggle {
-    padding: 2px;
-    width: 43px;
-    height: 31px;
-  }
-
-  .dropdown-menu {
-    min-width: 0;
-  }
-
   .sword .arms-icon {
     background-color: #ff4232;
   }
@@ -54,6 +44,12 @@
     img {
       width: 25px;
       height: 25px;
+    }
+
+    .airforce-none {
+      display: inline-block;
+      width: 25px;
+      height: 21px;
     }
   }
 }
