@@ -1,6 +1,6 @@
 'use strict';
 
-import MainController from './main/main.controller';
+import MainController from './pages/main/main.controller';
 import NavbarController from './components/navbar/navbar.controller';
 import TechTreeController from './components/techTree/techTree.controller';
 import {ArmsInfoController, ArmsDropdownDirective} from './components/armsInfo/armsInfo.controller';
@@ -8,8 +8,9 @@ import NewGameController from './components/dialogs/newGame.controller';
 import TechDetailController from './components/dialogs/techDetail.controller';
 
 import Players from './services/players';
-import Tech from './services/tech';
 import Firebase from './services/firebase';
+
+import Tech from './values/tech';
 
 angular.module('civbgSupport', [
   'ngAnimate',
@@ -36,7 +37,7 @@ angular.module('civbgSupport', [
     $stateProvider
       .state('home', {
         url: '/',
-        templateUrl: 'app/main/main.html'
+        templateUrl: 'app/pages/main/main.html'
       });
 
     $urlRouterProvider.otherwise('/');
