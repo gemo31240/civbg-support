@@ -1,0 +1,19 @@
+{
+  "version": "1.6.2",
+  "compilerOptions": {
+    "module": "commonjs",
+    "declarationFiles": true,
+    "noExternalResolve": false,
+    "noImplicitAny": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "outDir": ".tmp"
+  },
+  "filesGlob": [
+    "src/app/**/*.ts"
+  ],
+  "files": [
+    "src/app.ts",
+    "src/constants.ts"
+  ]
+}

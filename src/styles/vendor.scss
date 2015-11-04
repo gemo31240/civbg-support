@@ -5,6 +5,8 @@ $icon-font-path: "/bower_components/bootstrap-sass-official/assets/fonts/bootstr
 // bower:scss
 // endbower
 
+@import '../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
+
 .modal-lg {
   width: 90%;
   height: 90%;

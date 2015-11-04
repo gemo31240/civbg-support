@@ -1,0 +1,41 @@
+{
+  "repos": [
+    {
+      "url": "https://github.com/borisyankov/DefinitelyTyped.git",
+      "ref": "master"
+    }
+  ],
+  "path": "typings",
+  "bundle": "typings/bundle.d.ts",
+  "link": {
+    "npm": {
+      "include": true
+    }
+  },
+  "dependencies": {
+    "angularjs/angular.d.ts": {
+      "ref": "0dd29bf8253536ae24e61c109524e924ea510046"
+    },
+    "angularjs/angular-route.d.ts": {
+      "ref": "0dd29bf8253536ae24e61c109524e924ea510046"
+    },
+    "angularjs/angular-animate.d.ts": {
+      "ref": "0dd29bf8253536ae24e61c109524e924ea510046"
+    },
+    "angularjs/angular-cookies.d.ts": {
+      "ref": "0dd29bf8253536ae24e61c109524e924ea510046"
+    },
+    "angular-ui-router/angular-ui-router.d.ts": {
+      "ref": "0dd29bf8253536ae24e61c109524e924ea510046"
+    },
+    "angular-ui-bootstrap/angular-ui-bootstrap.d.ts": {
+      "ref": "0dd29bf8253536ae24e61c109524e924ea510046"
+    },
+    "angularjs/angular-sanitize.d.ts": {
+      "ref": "0dd29bf8253536ae24e61c109524e924ea510046"
+    },
+    "angularjs/angular-resource.d.ts": {
+      "ref": "0dd29bf8253536ae24e61c109524e924ea510046"
+    }
+  }
+}
