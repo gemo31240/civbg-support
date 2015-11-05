@@ -1,0 +1,8 @@
+<div class="container">
+  <div ng-repeat="player in ctrl.playerRepository.players" class="player-area {{player.color}}">
+    <span class="player-badge {{player.color}}">{{player.color}}</span>
+
+    <!--<ng-include src="'app/components/armsInfo/armsInfo.html'"></ng-include>-->
+    <!--<ng-include src="'app/components/techTree/techTree.html'"></ng-include>-->
+  </div>
+</div>

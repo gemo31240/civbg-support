@@ -15,7 +15,7 @@ module.exports = function (options) {
       //.pipe(isDist ? $.concat('app.js') : $.util.noop())
       .pipe($.ngAnnotate({gulpWarnings: false}))
       //.pipe(isDist ? $.uglify() : $.util.noop())
-      .pipe($.wrap('(function(){<%= contents %>}());'))
+      //.pipe($.wrap('(function(){<%= contents %>}());'))
       //.pipe($.wrap({ src: './iife.txt'}))
       .pipe(gulp.dest('.tmp'));
   });

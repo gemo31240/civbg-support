@@ -11,7 +11,7 @@ var paths = {
 
 var globs = {
   sass: ['src/app/**/*.scss'],
-  html: 'src/**/*.html',
+  html: ['src/index.html', 'src/**/*.html'],
   assets: 'src/assets/**/*.*',
   app: ['src/*.ts', 'src/app/**/*.ts'],
   // karma typescript preprocessor generates a bunch of .ktp.ts which gets picked

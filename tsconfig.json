@@ -1,12 +1,14 @@
 {
   "version": "1.6.2",
   "compilerOptions": {
+    "target": "es5",
     "module": "commonjs",
     "declarationFiles": true,
     "noExternalResolve": false,
     "noImplicitAny": true,
     "removeComments": true,
     "preserveConstEnums": true,
+    "experimentalDecorators": true,
     "outDir": ".tmp"
   },
   "filesGlob": [

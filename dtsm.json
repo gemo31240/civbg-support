@@ -36,6 +36,9 @@
     },
     "angularjs/angular-resource.d.ts": {
       "ref": "0dd29bf8253536ae24e61c109524e924ea510046"
+    },
+    "lodash/lodash.d.ts": {
+      "ref": "001ca36ba58cef903c4c063555afb07bbc36bb58"
     }
   }
 }
