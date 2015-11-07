@@ -10,7 +10,7 @@ export default class Player {
   }
 
   constructor() {
-    console.log('Player');
+    this._color = 'RED';
   }
 //Players.$inject = ['$rootScope', '$firebaseArray', 'Firebase'];
 

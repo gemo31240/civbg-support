@@ -13,11 +13,11 @@ module.exports = function (options) {
   gulp.task('watch', ['styles', 'build'], function () {
     //gulp.watch(options.globs.appWithDefinitions, series(['ts:compile', 'browserify']));
     watch(options.globs.app, function () {
-      series('build');
+      series('ts:compile', 'browserify', 'inject');
     });
 
     watch(options.globs.html, function(){
-      series('styles', 'build');
+      series('styles', 'build','html');
     });
 
     watch(options.globs.sass, ['styles']);

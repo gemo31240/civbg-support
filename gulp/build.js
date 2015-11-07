@@ -8,7 +8,7 @@ var $ = require('gulp-load-plugins')({
 
 module.exports = function (options) {
   gulp.task('build', function () {
-    series('ts:compile', 'browserify', 'html', 'inject');
+    series('ts:compile', 'browserify', 'inject');
   });
 
   gulp.task('inject', function () {

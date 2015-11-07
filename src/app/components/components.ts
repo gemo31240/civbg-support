@@ -1,4 +1,5 @@
 'use strict';
 
-import './navbar/navbar.directive';
+import './newGameDialog/newGameDialog';
+import './navbar/navbar';
 import './playersView/playersView';

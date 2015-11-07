@@ -3,16 +3,16 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
-    "declarationFiles": true,
     "noExternalResolve": false,
     "noImplicitAny": true,
     "removeComments": true,
     "preserveConstEnums": true,
     "experimentalDecorators": true,
-    "outDir": ".tmp"
+    "outDir": ".tmp",
+    "sourceMap": true
   },
   "filesGlob": [
-    "src/app/**/*.ts"
+    "src/app/*/*.ts"
   ],
   "files": [
     "src/app.ts",

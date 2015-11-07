@@ -29,7 +29,8 @@
       "ref": "0dd29bf8253536ae24e61c109524e924ea510046"
     },
     "angular-ui-bootstrap/angular-ui-bootstrap.d.ts": {
-      "ref": "0dd29bf8253536ae24e61c109524e924ea510046"
+      "repo": "https://github.com/wiro34/DefinitelyTypedPatches.git",
+      "ref": "259d8ca64d7a0d9db737b2d7e52a02f48521440e"
     },
     "angularjs/angular-sanitize.d.ts": {
       "ref": "0dd29bf8253536ae24e61c109524e924ea510046"
@@ -39,6 +40,18 @@
     },
     "lodash/lodash.d.ts": {
       "ref": "001ca36ba58cef903c4c063555afb07bbc36bb58"
+    },
+    "power-assert/power-assert.d.ts": {
+      "ref": "421d6610bdb09e1015b71f5991d7a68d079eca21"
+    },
+    "sinon/sinon.d.ts": {
+      "ref": "421d6610bdb09e1015b71f5991d7a68d079eca21"
+    },
+    "mocha/mocha.d.ts": {
+      "ref": "421d6610bdb09e1015b71f5991d7a68d079eca21"
+    },
+    "gulp-mocha/gulp-mocha.d.ts": {
+      "ref": "421d6610bdb09e1015b71f5991d7a68d079eca21"
     }
   }
 }

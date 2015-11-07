@@ -2,22 +2,15 @@
 
 import * as angular from 'angular';
 import * as _ from 'lodash';
-import Player from "./player";
-
+import Player from './player';
 import {service, inject} from '../../../app.decorators';
 
-@service('PlayerRepository')
-@inject('$window', '$q')
-export default class PlayerRepository {
+@service
+class PlayerRepository {
   private _players: Player[];
 
   get players(): Player[] {
     return this._players;
-  }
-
-  constructor($window: ng.IWindowService, $q: ng.IQService) {
-    console.log($window);
-    console.log($q);
   }
 
   newGame(numOfPlayers: number): void {
@@ -60,5 +53,4 @@ export default class PlayerRepository {
 
 }
 
-//angular.module(appName).service('PlayerRepository', PlayerRepository);
-//export var service =
+export default PlayerRepository;

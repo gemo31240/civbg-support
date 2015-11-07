@@ -3,14 +3,31 @@
 var gulp = require('gulp');
 var browserSync = require('browser-sync');
 var browserify = require('browserify');
+var watchify = require('watchify');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var sourcemaps = require('gulp-sourcemaps');
+var _ = require('lodash');
 var $ = require('gulp-load-plugins')();
 
+//var customOpts = {
+//  entries: ['.tmp/app.js'],
+//  debug: true
+//};
+//var opts = _.assign({}, watchify.args, customOpts);
+//console.log(opts);
+//var b = watchify(browserify(opts));
+
 module.exports = function(options) {
+  var browserifyOptions = {
+    entries: '.tmp/app.js',
+    cache: {},
+    packageCache: {},
+    plugin: [watchify]
+  };
+
   gulp.task('browserify', function () {
-    return browserify('.tmp/app.js')
+    return browserify(browserifyOptions)
       .bundle()
       .on('error', options.handleErrors('browserify'))
       .pipe(source('bundle.js'))

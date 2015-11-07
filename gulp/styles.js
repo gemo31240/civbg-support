@@ -33,7 +33,6 @@ module.exports = function(options) {
       .pipe($.inject(injectFiles, injectOptions))
       .pipe(indexFilter.restore())
       .pipe(vendorFilter)
-      ////.pipe(wiredep(options.wiredep))
       .pipe(vendorFilter.restore())
       .pipe($.sourcemaps.init())
       .pipe($.sass(sassOptions)).on('error', options.handleErrors('Sass'))

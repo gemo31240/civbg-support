@@ -1,15 +1,16 @@
 'use strict';
 
 import * as angular from 'angular';
+import * as _ from 'lodash';
 import {appName} from './constants';
 
-interface ModuleOption {
-  moduleName: string;
-  componentName?: string;
+class Directive implements ng.IDirective {
 }
 
-interface NamedFunction extends Function {
-  name: string;
+export function getClassName(clazz: Function) {
+  var funcNameRegex = /function (.{1,})\(/;
+  var results = (funcNameRegex).exec((clazz).toString());
+  return (results && results.length > 1) ? results[1] : "";
 }
 
 export let inject = (...injectableNames: string[]) => {
@@ -18,24 +19,34 @@ export let inject = (...injectableNames: string[]) => {
   };
 };
 
-//let controller = (componentName: string) => {
-//  return (controllerClazz: Function) => {
-//    let clazz = <NamedFunction>controllerClazz;
-//    angular.module(appName).controller(componentName || clazz.name, clazz);
-//  };
-//};
-
-export let service = (componentName: string) => {
-  console.log(componentName);
-  return (serviceClazz: Function) => {
-    let clazz = <NamedFunction>serviceClazz;
-    console.log(clazz.name);
-    angular.module(appName).service(componentName || clazz.name, serviceClazz);
+export let serviceOf = (componentName: string) => {
+  return (clazz: Function) => {
+    if (!clazz.name) {
+      clazz.name = getClassName(clazz);
+    }
+    angular.module(appName).service(componentName || clazz.name, clazz);
   };
 };
 
-//export default {
-  //controller: controller,
-  //inject: inject
-  //service: service
-//};
+export let service = (clazz: Function) => {
+  if (!clazz.name) {
+    clazz.name = getClassName(clazz);
+  }
+  angular.module(appName).service(clazz.name, clazz);
+};
+
+export let directive = (componentName: string) => {
+  return (clazz: Function) => {
+    var factory: ng.IDirectiveFactory = (...args: any[]): ng.IDirective => {
+      //args.unshift(null);
+      //args.unshift(clazz);
+      //var newInstance = new (<typeof Directive>(_.bind.apply(null, args)));
+
+      var newInstance = new Object(clazz.prototype);
+      clazz.apply(newInstance, args);
+      return newInstance;
+    };
+    factory.$inject = clazz.$inject || [];
+    angular.module(appName).directive(componentName, factory);
+  };
+};
