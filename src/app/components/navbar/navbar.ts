@@ -15,7 +15,6 @@ class NavbarComponent implements ng.IDirective {
 @inject('$uibModal')
 export class NavbarController {
   constructor(private $modal: ng.ui.bootstrap.IModalService) {
-    console.log($modal);
     //this.Players = Players;
   }
 

@@ -10,17 +10,18 @@ module.exports = function (config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['mocha', 'browserify'],
+    frameworks: ['browserify', 'mocha'],
 
 
     // list of files / patterns to load in the browser
     files: [
-      'node_modules/jquery/dist/jquery.js',
-      'src/app.ts',
-      {pattern: 'src/*.ts', included: false},
-      {pattern: 'src/**/*.ts', included: false},
-      {pattern: 'src/**/*.html', included: true},
-      {pattern: 'src/**/*.spec.js', included: true}
+      '.tmp/bundle.js',
+      'node_modules/power-assert/build/power-assert.js',
+      //{pattern: 'src/*.ts', included: false},
+      //{pattern: 'src/**/*.ts', included: false},
+      {pattern: 'src/**/*.spec.ts', included: false}
+      //{pattern: '.tmp/bundle.js', included: true},
+      //{pattern: 'src/**/*.spec.js', included: false}
     ],
 
 
@@ -31,15 +32,8 @@ module.exports = function (config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'src/**/*.html': ['ng-html2js'],
-      'src/**/*.ts': ['browserify'],
-      'src/**/*.js': ['browserify']
-    },
-
-
-    ngHtml2JsPreprocessor: {
-      stripPrefix: 'src/',
-      moduleName: 'templates'
+      'src/**/*.ts': ['browserify']
+      //'src/**/*.ts': ['browserify']
     },
 
 
@@ -48,16 +42,24 @@ module.exports = function (config) {
       plugin: [
         ['tsify', {target: 'ES5'}]
       ],
-      transform: [
-        ['babelify', {presets: ['es2015'], plugins:['babel-plugin-espower']}]
-      ]
+      //transform: [
+        //['tsify', {target: 'ES5'}]
+        //['babelify', {presets: ['es2015']}],
+        //'espowerify'
+      //]
     },
 
+    //plugins: [
+    //  'karma-mocha',
+    //  'karma-browserify',
+    //  'karma-phantomjs-launcher',
+    //  'karma-ng-html2js-preprocessor'
+    //],
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['mocha'],
+    reporters: ['progress'],
 
 
     // web server port
@@ -85,6 +87,6 @@ module.exports = function (config) {
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false
+    singleRun: true
   })
 };

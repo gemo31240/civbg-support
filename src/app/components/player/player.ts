@@ -1,23 +1,14 @@
 'use strict';
 
-import * as angular from 'angular';
-import * as _ from 'lodash';
-import Player from './player';
-import {service, inject} from '../../../app.decorators';
+import {appName} from '../../../constants';
+import {Civilization} from '../../civilizations';
 
-@service
-class PlayerRepository {
-  private _players: Player[];
+export default class Player {
+  public civilizationId: string;
+  public color: string;
 
-  get players(): Player[] {
-    return this._players;
+  constructor() {
   }
-
-  newGame(numOfPlayers: number): void {
-    this._players = [];
-    _.times(numOfPlayers, () => this._players.push(new Player()));
-  }
-
 //Players.$inject = ['$rootScope', '$firebaseArray', 'Firebase'];
 
   //constructor($rootScope, $firebaseArray, Firebase) {
@@ -50,7 +41,4 @@ class PlayerRepository {
   //    });
   //  });
   //}
-
 }
-
-export default PlayerRepository;

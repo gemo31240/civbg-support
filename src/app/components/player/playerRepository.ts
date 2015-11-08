@@ -1,17 +1,27 @@
 'use strict';
 
-import {appName} from '../../../constants';
+import * as angular from 'angular';
+import * as _ from 'lodash';
+import Player from './player';
+import {service, inject} from '../../../app.decorators';
 
-export default class Player {
-  private _color: string;
+@service
+class PlayerRepository {
+  private _players: Player[] = [];
 
-  get color(): string {
-    return this._color;
+  get players(): Player[] {
+    return this._players;
   }
 
-  constructor() {
-    this._color = 'RED';
+  newGame(players: Player[]) {
+    console.log(this._players);
+    _.times(this._players.length, () => this._players.splice(0));
+    console.log(this._players);
+    _.each<Player>(players, (player) => this._players.push(player));
+    console.log(this._players);
+
   }
+
 //Players.$inject = ['$rootScope', '$firebaseArray', 'Firebase'];
 
   //constructor($rootScope, $firebaseArray, Firebase) {
@@ -44,4 +54,7 @@ export default class Player {
   //    });
   //  });
   //}
+
 }
+
+export default PlayerRepository;
