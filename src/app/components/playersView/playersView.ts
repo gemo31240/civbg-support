@@ -1,8 +1,9 @@
 'use strict';
 
-import {appName} from '../../../constants';
+import {directive, inject} from '../../../app.decorators';
 import PlayerRepository from '../player/playerRepository';
 
+@directive('playersView')
 export default class PlayersViewComponent implements ng.IDirective {
   restrict = 'E';
   scope = {};
@@ -11,12 +12,9 @@ export default class PlayersViewComponent implements ng.IDirective {
   templateUrl = 'app/components/playersView/playersView.html';
 }
 
+@inject(PlayerRepository.name)
 export class PlayersViewController {
-  public static $inject = [PlayerRepository.name];
-
   constructor(private playerRepository: PlayerRepository) {
     //this.playerRepository.newGame(4);
   }
 }
-
-angular.module(appName).directive('playersView', () => new PlayersViewComponent);

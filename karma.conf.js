@@ -49,7 +49,7 @@ module.exports = function (config) {
         ['tsify', {target: 'ES5'}]
       ],
       transform: [
-        ['babelify', {presets: ['es2015'], plugins:['babel-plugin-espower']}]
+        ['babelify', {presets: ['es2015'], plugins: ['babel-plugin-espower']}]
       ]
     },
 

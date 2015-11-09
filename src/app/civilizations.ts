@@ -1,12 +1,6 @@
 'use strict';
 
 export class Civilization {
-  //public id: string;
-  //public name: string;
-  //public leader: string;
-  //public beginningTech: string;
-  //public government: string;
-
   constructor(public id: string,
               public name: string,
               public leader: string,

@@ -1,20 +1,20 @@
 'use strict';
 
-import 'jquery';
 import assert from 'power-assert';
 import sinon from 'sinon';
 import * as _ from 'lodash';
 import 'angular-mocks';
 import './navbar';
+import NewGameDialogSetting from '../newGameDialog/newGameDialog';
 
 describe('Component: navber', ()=> {
   beforeEach(angular.mock.module('civbgSupport'));
   beforeEach(angular.mock.module('templates'));
 
-  var scope, element, $modalMock;
+  var scope, element, modalSpy;
 
   beforeEach(inject(($rootScope, $compile, $uibModal) => {
-    $modalMock = sinon.stub($uibModal);
+    modalSpy = sinon.spy($uibModal, 'open');
     scope = $rootScope.$new();
     element = $compile('<navbar></navbar>')(scope);
     scope.$digest();
@@ -25,10 +25,8 @@ describe('Component: navber', ()=> {
   });
 
   it('opens new game dialog when new game link clicked', function () {
-    assert($modalMock.expect('open').once().returns({result: {then: () => {}}}));
     element.find('#new-game-link').click();
     scope.$digest();
-    //assert($modal.open.callCount === 1);
-    $modalMock.verify();
+    assert(modalSpy.withArgs(NewGameDialogSetting).calledOnce);
   });
 });

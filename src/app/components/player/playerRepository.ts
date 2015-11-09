@@ -4,6 +4,7 @@ import * as angular from 'angular';
 import * as _ from 'lodash';
 import Player from './player';
 import {service, inject} from '../../../app.decorators';
+import ListIterator = _.ListIterator;
 
 @service
 class PlayerRepository {
@@ -13,13 +14,10 @@ class PlayerRepository {
     return this._players;
   }
 
-  newGame(players: Player[]) {
-    console.log(this._players);
+  startNewGame(players: Player[]) {
+    // don't do `this._players = players`
     _.times(this._players.length, () => this._players.splice(0));
-    console.log(this._players);
-    _.each<Player>(players, (player) => this._players.push(player));
-    console.log(this._players);
-
+    _.each(players, <ListIterator<Player, void>>((player) => this._players.push(player)));
   }
 
 //Players.$inject = ['$rootScope', '$firebaseArray', 'Firebase'];

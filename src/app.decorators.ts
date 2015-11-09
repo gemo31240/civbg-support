@@ -4,9 +4,6 @@ import * as angular from 'angular';
 import * as _ from 'lodash';
 import {appName} from './constants';
 
-class Directive implements ng.IDirective {
-}
-
 export function getClassName(clazz: Function) {
   var funcNameRegex = /function (.{1,})\(/;
   var results = (funcNameRegex).exec((clazz).toString());
@@ -38,10 +35,6 @@ export let service = (clazz: Function) => {
 export let directive = (componentName: string) => {
   return (clazz: Function) => {
     var factory: ng.IDirectiveFactory = (...args: any[]): ng.IDirective => {
-      //args.unshift(null);
-      //args.unshift(clazz);
-      //var newInstance = new (<typeof Directive>(_.bind.apply(null, args)));
-
       var newInstance = new Object(clazz.prototype);
       clazz.apply(newInstance, args);
       return newInstance;

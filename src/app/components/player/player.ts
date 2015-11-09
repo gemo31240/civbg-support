@@ -2,10 +2,17 @@
 
 import {appName} from '../../../constants';
 import {Civilization} from '../../civilizations';
+import Tech from '../../classes/techs';
+
+export class TechTree {
+  public first: Tech[] = [];
+  public second: Tech[] = [];
+}
 
 export default class Player {
   public civilizationId: string;
   public color: string;
+  public techTree: TechTree;
 
   constructor() {
   }
