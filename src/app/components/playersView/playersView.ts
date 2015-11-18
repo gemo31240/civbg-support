@@ -1,10 +1,10 @@
 'use strict';
 
 import {directive, inject} from '../../../app.decorators';
-import PlayerRepository from '../player/playerRepository';
+import PlayerRepository from '../../models/playerRepository';
 
-@directive('playersView')
-export default class PlayersViewComponent implements ng.IDirective {
+@directive('civbgSupportPlayersView')
+class PlayersViewComponent implements ng.IDirective {
   restrict = 'E';
   scope = {};
   controller = PlayersViewController;
@@ -15,6 +15,13 @@ export default class PlayersViewComponent implements ng.IDirective {
 @inject(PlayerRepository.name)
 export class PlayersViewController {
   constructor(private playerRepository: PlayerRepository) {
-    //this.playerRepository.newGame(4);
+    playerRepository.startNewGame([
+      {color: 'RED', civilizationId: 'America'},
+      {color: 'GREEN', civilizationId: 'India'},
+      {color: 'BLUE', civilizationId: 'Greece'},
+      {color: 'YELLOW', civilizationId: 'Mongol'}
+    ]);
   }
 }
+
+export default PlayersViewComponent;

@@ -3,26 +3,24 @@
 var gulp = require('gulp');
 var browserSync = require('browser-sync');
 var browserSyncSpa = require('browser-sync-spa');
-
-//var util = require('util');
-
+var util = require('util');
 var middleware = require('./proxy');
 
 module.exports = function(options) {
 
   function browserSyncInit(baseDir, browser) {
     browser = browser === undefined ? 'default' : browser;
-    //
-    //var routes = null;
-    //if(baseDir === options.src || (util.isArray(baseDir) && baseDir.indexOf(options.src) !== -1)) {
-    //  routes = {
-    //    '/bower_components': 'bower_components'
-    //  };
-    //}
+
+    var routes = null;
+    if(baseDir === options.paths.src || (util.isArray(baseDir) && baseDir.indexOf(options.paths.src) !== -1)) {
+      routes = {
+        '/node_modules': 'node_modules'
+      };
+    }
 
     var server = {
       baseDir: '.tmp',
-      //routes: routes
+      routes: routes
     };
 
     if(middleware.length > 0) {
@@ -45,10 +43,10 @@ module.exports = function(options) {
 
   //gulp.task('serve', ['watch'], function () {
   gulp.task('serve', ['build', 'html','watch'], function () {
-    browserSyncInit([options.tmp + '/serve', options.src]);
+    browserSyncInit([options.paths.tmp + '/serve', options.paths.src]);
   });
 
   gulp.task('serve:dist', ['build'], function () {
-    browserSyncInit(options.dist);
+    browserSyncInit(options.paths.dist);
   });
 };

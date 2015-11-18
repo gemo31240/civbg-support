@@ -6,7 +6,7 @@ import 'angular-mocks';
 import ElementHelper from '../../../../test/helper/elementHelper';
 import NewGameDialogSetting from './newGameDialog';
 
-describe('Component: newGameDialog', ()=> {
+describe('Component: NewGameDialog', ()=> {
   beforeEach(angular.mock.module('civbgSupport'));
   beforeEach(angular.mock.module('templates'));
 

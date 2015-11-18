@@ -1,10 +1,10 @@
 'use strict';
 
-import * as angular from 'angular';
 import * as _ from 'lodash';
-import Player from './player';
-import {service, inject} from '../../../app.decorators';
-import ListIterator = _.ListIterator;
+import Player, {PlayerConfig} from './player';
+import {service, inject} from '../../app.decorators';
+
+//Players.$inject = ['$rootScope', '$firebaseArray', 'Firebase'];
 
 @service
 class PlayerRepository {
@@ -14,13 +14,9 @@ class PlayerRepository {
     return this._players;
   }
 
-  startNewGame(players: Player[]) {
-    // don't do `this._players = players`
-    _.times(this._players.length, () => this._players.splice(0));
-    _.each(players, <ListIterator<Player, void>>((player) => this._players.push(player)));
+  public startNewGame(playerConfigs: PlayerConfig[]) {
+    this._players = _.map(playerConfigs, (config) => new Player(config));
   }
-
-//Players.$inject = ['$rootScope', '$firebaseArray', 'Firebase'];
 
   //constructor($rootScope, $firebaseArray, Firebase) {
   //  var playersRef = new Firebase('https://civbg-support.Firebaseio.com/players');

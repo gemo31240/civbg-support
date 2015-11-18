@@ -1,13 +1,13 @@
-<div ng-controller="TechTreeController as ctrl" class="tech-tree tech-level1-{{player.tech.one.length}}">
-  <div ng-repeat="level in ctrl.levels" class="tech-row">
+<div class="tech-tree tech-level1-{{player.tech.one.length}}">
+  <div ng-repeat="level in ctrl.LEVELS" class="tech-row">
     <ul class="tech-list tech-{{level}}">
-      <li ng-repeat="tech in player.tech[level]" class="tech-list-item">
+      <li ng-repeat="tech in ctrl.tree.get(level)" class="tech-list-item">
         <a class="remove-icon" ng-click="ctrl.removeTech(level, tech)">
           <span class="glyphicon glyphicon-remove"></span>
         </a>
 
         <div class="tech-list-item-wrapper">
-          <a ng-click="ctrl.openDetail(tech)">{{ctrl.toName(tech)}}</a>
+          <a ng-bind="tech.name"></a>
         </div>
       </li>
       <li class="tech-list-item append-tech" ng-if="ctrl.isTechAddable(level)">

@@ -17,10 +17,8 @@ module.exports = function (config) {
     files: [
       'node_modules/jquery/dist/jquery.js',
       'src/app.ts',
-      {pattern: 'src/*.ts', included: false},
-      {pattern: 'src/**/*.ts', included: false},
       {pattern: 'src/**/*.html', included: true},
-      //{pattern: 'src/**/*.spec.js', included: true}
+      {pattern: 'test/**/*.js', included: false},
       {pattern: 'src/**/*.spec.js', watched: false, included: true, served: true}
     ],
 
@@ -34,7 +32,8 @@ module.exports = function (config) {
     preprocessors: {
       'src/**/*.html': ['ng-html2js'],
       'src/**/*.ts': ['browserify'],
-      'src/**/*.js': ['browserify']
+      'src/**/*.js': ['browserify'],
+      'test/**/*.js': ['browserify']
     },
 
 
@@ -46,8 +45,9 @@ module.exports = function (config) {
 
     browserify: {
       debug: true,
-      bundleDelay: 1000,
+      //bundleDelay: 1000,
       plugin: [
+        ['watchify'],
         ['tsify', {target: 'ES5'}]
       ],
       transform: [

@@ -4,20 +4,19 @@ import assert from 'power-assert';
 import sinon from 'sinon';
 import * as _ from 'lodash';
 import 'angular-mocks';
-import './navbar';
+import ElementHelper from '../../../../test/helper/elementHelper';
 import NewGameDialogSetting from '../newGameDialog/newGameDialog';
 
-describe('Component: navber', ()=> {
+describe('Component: Navbar', ()=> {
   beforeEach(angular.mock.module('civbgSupport'));
   beforeEach(angular.mock.module('templates'));
 
-  var scope, element, modalSpy;
+  var element, $uibModal;
 
-  beforeEach(inject(($rootScope, $compile, $uibModal) => {
-    modalSpy = sinon.spy($uibModal, 'open');
-    scope = $rootScope.$new();
-    element = $compile('<navbar></navbar>')(scope);
-    scope.$digest();
+  beforeEach(inject(($injector) => {
+    $uibModal = $injector.get('$uibModal');
+    sinon.stub($uibModal, 'open');
+    element = new ElementHelper('<civbg-support-navbar></civbg-support-navbar>');
   }));
 
   it('shows new game link', ()=> {
@@ -26,7 +25,6 @@ describe('Component: navber', ()=> {
 
   it('opens new game dialog when new game link clicked', function () {
     element.find('#new-game-link').click();
-    scope.$digest();
-    assert(modalSpy.withArgs(NewGameDialogSetting).calledOnce);
+    assert($uibModal.open.withArgs(NewGameDialogSetting).calledOnce);
   });
 });

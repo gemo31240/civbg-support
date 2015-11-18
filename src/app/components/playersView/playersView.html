@@ -1,8 +1,8 @@
 <div class="container">
   <div ng-repeat="player in ctrl.playerRepository.players" class="player-area {{player.color}}">
-    <span class="player-badge {{player.color}}">{{player.color}}</span>
+    <span class="player-badge {{player.color}}">{{player.civilization.name}}</span>
 
-    <tech-tree player="player"></tech-tree>
+    <civbg-support-tech-tree-view tree="player.techTree"></civbg-support-tech-tree-view>
     <!--<ng-include src="'app/components/armsInfo/armsInfo.html'"></ng-include>-->
     <!--<ng-include src="'app/components/techTree/techTree.html'"></ng-include>-->
   </div>

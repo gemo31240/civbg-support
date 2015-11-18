@@ -3,7 +3,7 @@
 import {directive, inject} from '../../../app.decorators';
 import NewGameDialogSetting from '../newGameDialog/newGameDialog';
 
-@directive('navbar')
+@directive('civbgSupportNavbar')
 class NavbarComponent implements ng.IDirective {
   restrict = 'E';
   scope = {};
@@ -17,7 +17,7 @@ export class NavbarController {
   constructor(private $modal: ng.ui.bootstrap.IModalService) {
   }
 
-  newGame() {
+  public newGame() {
     this.$modal.open(NewGameDialogSetting);
   }
 }

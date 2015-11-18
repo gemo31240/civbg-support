@@ -20,7 +20,9 @@ module.exports = function (options) {
       series('styles', 'build','html');
     });
 
-    watch(options.globs.sass, ['styles']);
+    watch(options.globs.sass, function () {
+      series('styles');
+    });
   });
 
   //gulp.task('watch', ['scripts:watch', 'inject'], function () {

@@ -1,29 +1,34 @@
 'use strict';
 
-import * as angular from 'angular';
 import * as _ from 'lodash';
 import {directive, inject} from '../../../app.decorators';
-import PlayerRepository from '../player/playerRepository';
+import PlayerRepository from '../../models/playerRepository';
+import Tech, {LEVELS} from '../../models/tech';
+import TechTree from '../../models/techTree';
 
-@directive('playersView')
-export default class TechTreeComponent implements ng.IDirective {
+const REVERSED_LEVELS = _(LEVELS).reverse().value();
+
+@directive('civbgSupportTechTreeView')
+class TechTreeComponent implements ng.IDirective {
   restrict = 'E';
   scope = {};
   controller = TechTreeController;
   controllerAs = 'ctrl';
   bindToController = {
-    player: '='
+    tree: '='
   };
-  templateUrl = 'app/components/techTree/techTree.html';
+  templateUrl = 'app/components/techTreeView/techTreeView.html';
 }
 
-@inject('$scope', '$window', '$uibModal', 'Players', 'Tech')
+@inject('$window', PlayerRepository.name)
 export class TechTreeController {
-  constructor(private $scope: ng.IScope,
-              private $window: ng.IWindowService,
-              private $modal: ng.ui.bootstrap.IModalService,
+  public LEVELS = REVERSED_LEVELS;
+
+  public tree: TechTree;
+
+  constructor(private $window: ng.IWindowService,
               private playerRepository: PlayerRepository) {
-    //this.levels = _(['one', 'two', 'three', 'four']).reverse();
+    //this.levels = ;
     //
     this.initPlayerTechTree();
   }
@@ -34,49 +39,53 @@ export class TechTreeController {
     //}
     //this.player.tech.keep = true;
   }
+
   //
   //toName(techId) {
   //  return _.find(this.Tech, (tech) => tech.id === techId).name;
   //}
-  //
-  //isTechAddable(level) {
-  //  switch (level) {
-  //    case 'four':
-  //      return _.keys(this.player.tech.four).length < _.keys(this.player.tech.three).length - 1;
-  //    case 'three':
-  //      return _.keys(this.player.tech.three).length < _.keys(this.player.tech.two).length - 1;
-  //    case 'two':
-  //      return _.keys(this.player.tech.two).length < _.keys(this.player.tech.one).length - 1;
-  //    default:
-  //      return true;
-  //  }
-  //}
-  //
+
+  isTechAddable(level: string) {
+    switch (level) {
+      case 'fourth':
+        return _.keys(this.tree.fourth).length < _.keys(this.tree.third).length - 1;
+      case 'third':
+        return _.keys(this.tree.third).length < _.keys(this.tree.second).length - 1;
+      case 'second':
+        return _.keys(this.tree.second).length < _.keys(this.tree.first).length - 1;
+      default:
+        return true;
+    }
+  }
+
   //isNewtonUsed() {
   //  var containsNewton = (techIds) => _.contains(techIds, 'newton');
   //  var newtonScanner = (player) => containsNewton(player.tech.one) || containsNewton(player.tech.two) || containsNewton(player.tech.three) || containsNewton(player.tech.four);
   //  return _.find(this.players, newtonScanner);
   //}
-  //
-  //remainingTechs(level) {
-  //  var techs = _.chain(this.Tech)
-  //    .filter((tech) => tech.level === level)
-  //    .filter((tech) => _.values(this.player.tech[level]).indexOf(tech.id) === -1)
-  //    .value();
-  //
-  //  // ニュートン
-  //  if (level !== 'five' && !this.isNewtonUsed()) {
-  //    techs.push(this.Tech[this.Tech.length - 1]);
-  //  }
-  //
-  //  // 初期技術
-  //  if (level === 'one' && _.isEmpty(this.player.tech.one)) {
-  //    return _.filter(this.Tech, (tech) => tech.level === 'one' || tech.level === 'two');
-  //  }
-  //
-  //  return techs;
-  //}
-  //
+
+  remainingTechs(level: string) {
+    var techs: Tech[] = _(Tech.all)
+      .filter((tech) => tech.level === level)
+      .filter((tech) => {
+        console.log(this.tree.hasTech);
+        return this.tree.hasTech(tech);
+      })
+      .value();
+
+    //// ニュートン
+    //if (level !== 'five' && !this.isNewtonUsed()) {
+    //  techs.push(this.Tech[this.Tech.length - 1]);
+    //}
+    //
+    //// 初期技術
+    //if (level === 'one' && _.isEmpty(this.player.tech.one)) {
+    //  return _.filter(this.Tech, (tech) => tech.level === 'one' || tech.level === 'two');
+    //}
+
+    return techs;
+  }
+
   //appendTech(level, techId) {
   //  var length = _.max(_.chain(this.player.tech[level]).keys().map((k) => +k).value().concat([-1]));
   //  if (!this.player.tech[level]) {
@@ -146,3 +155,4 @@ export class TechTreeController {
   //}
 }
 
+export default TechTreeComponent;

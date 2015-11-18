@@ -1,12 +1,17 @@
 'use strict';
 
-import {appName} from '../../../constants';
-import {Civilization} from '../../civilizations';
-import Tech from '../../classes/techs';
+import Civilization from './civilization';
+import Tech from './tech';
 
 export class TechTree {
   public first: Tech[] = [];
   public second: Tech[] = [];
+}
+
+export class PlayerConfig {
+  constructor(public color: string = null,
+              public civilizationId: string = null) {
+  }
 }
 
 export default class Player {
@@ -14,8 +19,22 @@ export default class Player {
   public color: string;
   public techTree: TechTree;
 
-  constructor() {
+  public get civilization() {
+    return Civilization.find(this.civilizationId);
   }
+
+  constructor(config: PlayerConfig) {
+    this.civilizationId = config.civilizationId;
+    this.color = config.color;
+    this.techTree = new TechTree();
+
+    this.studyBeginningTech();
+  }
+
+  private studyBeginningTech() {
+    this.techTree.first.push(Tech.find(this.civilization.beginningTechId));
+  }
+
 //Players.$inject = ['$rootScope', '$firebaseArray', 'Firebase'];
 
   //constructor($rootScope, $firebaseArray, Firebase) {

@@ -10,23 +10,19 @@ export function getClassName(clazz: Function) {
   return (results && results.length > 1) ? results[1] : "";
 }
 
+interface IInjectable extends Function {
+  $inject: string[];
+}
+
 export let inject = (...injectableNames: string[]) => {
   return (target: Function) => {
-    target.$inject = injectableNames;
-  };
-};
-
-export let serviceOf = (componentName: string) => {
-  return (clazz: Function) => {
-    if (!clazz.name) {
-      clazz.name = getClassName(clazz);
-    }
-    angular.module(appName).service(componentName || clazz.name, clazz);
+    (<IInjectable>target).$inject = injectableNames;
   };
 };
 
 export let service = (clazz: Function) => {
   if (!clazz.name) {
+    //
     clazz.name = getClassName(clazz);
   }
   angular.module(appName).service(clazz.name, clazz);

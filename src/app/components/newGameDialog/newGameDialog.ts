@@ -2,9 +2,10 @@
 
 import * as _ from 'lodash';
 import {directive, inject} from '../../../app.decorators';
-import Colors from '../../colors';
-import Civilizations from '../../civilizations';
-import PlayerRepository, {PlayerSetting} from '../player/playerRepository';
+import Colors from '../../models/color';
+import Civilization from '../../models/civilization';
+import PlayerRepository from '../../models/playerRepository';
+import {PlayerConfig} from '../../models/player';
 
 class NewGameDialogSetting implements ng.ui.bootstrap.IModalSettings {
   animation = true;
@@ -13,40 +14,30 @@ class NewGameDialogSetting implements ng.ui.bootstrap.IModalSettings {
   templateUrl = 'app/components/newGameDialog/newGameDialog.html';
 }
 
-@inject('$uibModalInstance', 'PlayerRepository')
+@inject('$uibModalInstance', PlayerRepository.name)
 export class NewGameController {
   private COLORS = Colors;
-  private CIVILIZATIONS = Civilizations;
-  private playerSettings: PlayerSetting[];
+  private CIVILIZATIONS = Civilization.all;
+  private playerConfigs: PlayerConfig[];
 
   constructor(private $modalInstance: ng.ui.bootstrap.IModalServiceInstance,
               private playerRepository: PlayerRepository) {
-    this.playerSettings = [
-      new PlayerSetting(),
-      new PlayerSetting(),
-      new PlayerSetting(),
-      new PlayerSetting()
+    this.playerConfigs = [
+      new PlayerConfig(),
+      new PlayerConfig(),
+      new PlayerConfig(),
+      new PlayerConfig()
     ];
-
-    // it is dummy
-    //this.playerSettings[0].civilizationId = 'Aztec';
-    //this.playerSettings[0].color = 'RED';
-    //this.playerSettings[1].civilizationId = 'Japan';
-    //this.playerSettings[1].color = 'GREEN';
-    //this.playerSettings[2].civilizationId = 'America';
-    //this.playerSettings[2].color = 'BLUE';
-    //this.playerSettings[3].civilizationId = 'America';
-    //this.playerSettings[3].color = 'YELLOW';
   }
 
-  remainingColors(me: PlayerSetting) {
+  public remainingColors(me: PlayerConfig) {
     return _.reject(this.COLORS, (color) => {
-      return _.any(this.playerSettings, (setting) => setting !== me && setting.color === color)
+      return _.any(this.playerConfigs, (config) => config !== me && config.color === color)
     });
   }
 
-  ok() {
-    this.playerRepository.startNewGame(this.playerSettings);
+  public ok() {
+    this.playerRepository.startNewGame(this.playerConfigs);
     this.$modalInstance.close();
   }
 }
