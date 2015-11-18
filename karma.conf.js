@@ -20,7 +20,8 @@ module.exports = function (config) {
       {pattern: 'src/*.ts', included: false},
       {pattern: 'src/**/*.ts', included: false},
       {pattern: 'src/**/*.html', included: true},
-      {pattern: 'src/**/*.spec.js', included: true}
+      //{pattern: 'src/**/*.spec.js', included: true}
+      {pattern: 'src/**/*.spec.js', watched: false, included: true, served: true}
     ],
 
 
@@ -45,6 +46,7 @@ module.exports = function (config) {
 
     browserify: {
       debug: true,
+      bundleDelay: 1000,
       plugin: [
         ['tsify', {target: 'ES5'}]
       ],

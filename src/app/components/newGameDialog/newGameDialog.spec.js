@@ -10,24 +10,28 @@ describe('Component: newGameDialog', ()=> {
   beforeEach(angular.mock.module('civbgSupport'));
   beforeEach(angular.mock.module('templates'));
 
-  var scope, element, modalSpy, $modalInstance;
+  var element,  $rootScope, PlayerRepository;
 
-  beforeEach(inject(($rootScope, $compile, $uibModal) => {
-    $modalInstance = $uibModal.open(NewGameDialogSetting);
-    element = angular.element('body').find('#new-game-dialog');
-    //modalSpy = sinon.spy($uibModal, 'open');
-    //scope = $rootScope.$new();
-    //element = $compile('<navbar></navbar>')(scope);
+  beforeEach(inject(($injector, $uibModal) => {
+    $rootScope = $injector.get('$rootScope');
+    PlayerRepository = $injector.get('PlayerRepository');
+    $uibModal.open(NewGameDialogSetting);
     $rootScope.$digest();
+    element = angular.element('body').find('#new-game-dialog');
   }));
 
-  it('shows new game link', ()=> {
-    assert(_.contains(element.text(), 'プレイヤーの文明と色を選んでください。'));
+  afterEach(() => {
+    element.remove();
   });
 
-  //it('opens new game dialog when new game link clicked', function () {
-  //  element.find('#new-game-link').click();
-  //  scope.$digest();
-  //  assert(modalSpy.withArgs(NewGameDialogSetting).calledOnce);
+  //it('shows new game link', ()=> {
+  //  assert(_.contains(element.text(), 'プレイヤーの文明と色を選んでください。'));
   //});
+
+  it('opens new game dialog when new game link clicked', function () {
+    var spy = sinon.spy(PlayerRepository, 'startNewGame');
+    element.find('#new-game-start-button').click().trigger('click');
+    $rootScope.$digest();
+    assert(spy.called);
+  });
 });
