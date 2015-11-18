@@ -1,27 +1,27 @@
 <form name="NewGameForm" id="new-game-dialog" class="new-game-form form-horizontal">
-  <div class="form-group" ng-repeat="player in ctrl.players">
+  <div class="form-group" ng-repeat="setting in ctrl.playerSettings">
     <div class="col-sm-2 col-sm-offset-1 text-right">
       <label>{{$index + 1}}</label>
     </div>
 
     <div class="col-sm-4">
-      <select name="civilization-{{$index+1}}" id="new-game-{{$index}}-civilization" class="form-control"
-              ng-model="ctrl.players[$index].civilizationId"
+      <select name="civilization-{{$index+1}}" id="new-game-civilization-{{$index+1}}" class="form-control"
+              ng-model="setting.civilizationId"
               ng-options="civ.id as civ.name for civ in ctrl.CIVILIZATIONS" required>
       </select>
     </div>
 
     <div class="col-sm-4">
-      <select name="color-{{$index+1}}" id="new-game-{{$index+1}}-color" class="form-control"
-              ng-model="ctrl.players[$index].color"
-              ng-options="color for color in ctrl.remainingColors(player)" required>
+      <select name="color-{{$index+1}}" id="new-game-color-{{$index+1}}" class="form-control"
+              ng-model="setting.color"
+              ng-options="color for color in ctrl.remainingColors(setting)" required>
       </select>
     </div>
   </div>
 
   <div class="text-center">
     <p ng-if="NewGameForm.$invalid">プレイヤーの文明と色を選んでください。</p>
-    <button type="button" class="btn btn-primary"
+    <button type="button" class="btn btn-primary" id="new-game-start-button"
             ng-click="ctrl.ok()" ng-disabled="NewGameForm.$invalid">開始する
     </button>
   </div>
