@@ -348,7 +348,7 @@ export default class Tech {
       culturecard: null
     }),
     new Tech({
-      id: '3-1',
+      id: '火薬',
       name: '火薬',
       level: 'third',
       politics: null,
@@ -360,7 +360,7 @@ export default class Tech {
       culturecard: null
     }),
     new Tech({
-      id: '3-2',
+      id: '環境保護',
       name: '環境保護',
       level: 'third',
       politics: null,
@@ -372,7 +372,7 @@ export default class Tech {
       culturecard: null
     }),
     new Tech({
-      id: '3-3',
+      id: '教育',
       name: '教育',
       level: 'third',
       politics: null,
@@ -384,7 +384,7 @@ export default class Tech {
       culturecard: null
     }),
     new Tech({
-      id: '3-4',
+      id: '共産主義',
       name: '共産主義',
       level: 'third',
       politics: '共産主義',
@@ -396,7 +396,7 @@ export default class Tech {
       culturecard: null
     }),
     new Tech({
-      id: '3-5',
+      id: '銀行制度',
       name: '銀行制度',
       level: 'third',
       politics: null,
@@ -420,7 +420,7 @@ export default class Tech {
       culturecard: null
     }),
     new Tech({
-      id: '3-7',
+      id: '蒸気機関',
       name: '蒸気機関',
       level: 'third',
       politics: null,
@@ -432,7 +432,7 @@ export default class Tech {
       culturecard: null
     }),
     new Tech({
-      id: '3-8',
+      id: '神学',
       name: '神学',
       level: 'third',
       politics: '原理主義',
@@ -444,7 +444,7 @@ export default class Tech {
       culturecard: '上限+1',
     }),
     new Tech({
-      id: '3-9',
+      id: '生物学',
       name: '生物学',
       level: 'third',
       politics: null,
@@ -456,7 +456,7 @@ export default class Tech {
       culturecard: null
     }),
     new Tech({
-      id: '3-10',
+      id: '鋳金',
       name: '鋳金',
       level: 'third',
       politics: null,
@@ -480,7 +480,7 @@ export default class Tech {
       culturecard: null
     }),
     new Tech({
-      id: '4-1',
+      id: '共通規格',
       name: '共通規格',
       level: 'fourth',
       politics: null,
@@ -492,7 +492,7 @@ export default class Tech {
       culturecard: null
     }),
     new Tech({
-      id: '4-2',
+      id: '原子理論',
       name: '原子理論',
       level: 'fourth',
       politics: null,
@@ -504,7 +504,7 @@ export default class Tech {
       culturecard: null
     }),
     new Tech({
-      id: '4-3',
+      id: 'コンピューター',
       name: 'コンピューター',
       level: 'fourth',
       politics: null,
@@ -516,7 +516,7 @@ export default class Tech {
       culturecard: null
     }),
     new Tech({
-      id: '4-4',
+      id: '弾道学',
       name: '弾道学',
       level: 'fourth',
       politics: null,
@@ -528,7 +528,7 @@ export default class Tech {
       culturecard: null
     }),
     new Tech({
-      id: '4-5',
+      id: '内燃機関',
       name: '内燃機関',
       level: 'fourth',
       politics: null,
@@ -552,7 +552,7 @@ export default class Tech {
       culturecard: null
     }),
     new Tech({
-      id: '4-7',
+      id: 'プラスチック',
       name: 'プラスチック',
       level: 'fourth',
       politics: null,
@@ -576,7 +576,7 @@ export default class Tech {
       culturecard: null
     }),
     new Tech({
-      id: '5-1',
+      id: '宇宙飛行',
       name: '宇宙飛行',
       level: 'five',
       politics: null,

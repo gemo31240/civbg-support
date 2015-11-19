@@ -1,8 +1,8 @@
-<div class="tech-tree tech-level1-{{player.tech.one.length}}">
+<div class="tech-tree tech-level1-{{ctrl.tree.first.length}}">
   <div ng-repeat="level in ctrl.LEVELS" class="tech-row">
     <ul class="tech-list tech-{{level}}">
       <li ng-repeat="tech in ctrl.tree.get(level)" class="tech-list-item">
-        <a class="remove-icon" ng-click="ctrl.removeTech(level, tech)">
+        <a class="remove-icon" ng-click="ctrl.removeTech(tech.id)">
           <span class="glyphicon glyphicon-remove"></span>
         </a>
 
@@ -10,12 +10,12 @@
           <a ng-bind="tech.name"></a>
         </div>
       </li>
-      <li class="tech-list-item append-tech" ng-if="ctrl.isTechAddable(level)">
-        <div class="tech-list-item-wrapper">
-          <select name="appendTech"
+      <li class="tech-list-add" ng-if="ctrl.isTechAddable(level)">
+        <div class="tech-list-add-wrapper">
+          <select name="addTech" class="add-tech-select"
                   ng-options="tech.id as tech.name for tech in ctrl.remainingTechs(level)"
                   ng-model="selectedTechId"
-                  ng-change="ctrl.appendTech(level, selectedTechId); selectedTechId = ''">
+                  ng-change="ctrl.techSelectionChanged(selectedTechId, level); selectedTechId = ''">
             <option value="">----</option>
           </select>
         </div>

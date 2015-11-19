@@ -1,12 +1,8 @@
 'use strict';
 
 import Civilization from './civilization';
+import TechTree from './techTree';
 import Tech from './tech';
-
-export class TechTree {
-  public first: Tech[] = [];
-  public second: Tech[] = [];
-}
 
 export class PlayerConfig {
   constructor(public color: string = null,

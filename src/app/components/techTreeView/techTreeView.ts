@@ -33,7 +33,7 @@ export class TechTreeController {
     this.initPlayerTechTree();
   }
 
-  initPlayerTechTree() {
+  private initPlayerTechTree() {
     //if (!_.isObject(this.player.tech)) {
     //  this.player.tech = {};
     //}
@@ -45,17 +45,8 @@ export class TechTreeController {
   //  return _.find(this.Tech, (tech) => tech.id === techId).name;
   //}
 
-  isTechAddable(level: string) {
-    switch (level) {
-      case 'fourth':
-        return _.keys(this.tree.fourth).length < _.keys(this.tree.third).length - 1;
-      case 'third':
-        return _.keys(this.tree.third).length < _.keys(this.tree.second).length - 1;
-      case 'second':
-        return _.keys(this.tree.second).length < _.keys(this.tree.first).length - 1;
-      default:
-        return true;
-    }
+  public isTechAddable(level: string) {
+    return this.tree.isAddable(level);
   }
 
   //isNewtonUsed() {
@@ -64,13 +55,10 @@ export class TechTreeController {
   //  return _.find(this.players, newtonScanner);
   //}
 
-  remainingTechs(level: string) {
+  public remainingTechs(level: string) {
     var techs: Tech[] = _(Tech.all)
       .filter((tech) => tech.level === level)
-      .filter((tech) => {
-        console.log(this.tree.hasTech);
-        return this.tree.hasTech(tech);
-      })
+      .reject((tech) => this.tree.hasTech(tech.id))
       .value();
 
     //// ニュートン
@@ -86,25 +74,18 @@ export class TechTreeController {
     return techs;
   }
 
-  //appendTech(level, techId) {
-  //  var length = _.max(_.chain(this.player.tech[level]).keys().map((k) => +k).value().concat([-1]));
-  //  if (!this.player.tech[level]) {
-  //    this.player.tech[level] = {};
-  //  }
-  //  this.player.tech[level][length + 1] = techId;
-  //  this.updateArmsRank();
-  //}
-  //
-  //removeTech(level, techId) {
-  //  if (this.$window.confirm('ほんまに消すんか？')) {
-  //    var index = this.player.tech[level].indexOf(techId);
-  //    if (index >= 0) {
-  //      this.player.tech[level].splice(index, 1);
-  //      this.updateArmsRank();
-  //    }
-  //  }
-  //}
-  //
+  public techSelectionChanged(techId: string, level: string) {
+    this.tree.addTech(techId, level);
+    //this.updateArmsRank();
+  }
+
+  public removeTech(techId: string) {
+    if (this.$window.confirm('ほんまに消すんか？')) {
+      this.tree.removeTech(techId);
+      //this.updateArmsRank();
+    }
+  }
+
   //updateArmsRank() {
   //  var techArray = _.compact(_.flatten([
   //    _.values(this.player.tech.one),

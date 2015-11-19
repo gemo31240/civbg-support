@@ -1,11 +1,17 @@
 'use strict';
 
-import {isString} from 'lodash';
+import * as _ from 'lodash';
 
-export default function (tagOrElement) {
+export default function (tagOrElement, context) {
   var element;
+
   inject(($rootScope, $compile) => {
-    element = isString(tagOrElement) ? $compile(tagOrElement)($rootScope.$new()) : tagOrElement;
+    function prepareElement(tag, context) {
+      var scope = _.merge($rootScope.$new(), context);
+      return $compile(tagOrElement)(scope);
+    }
+
+    element = _.isString(tagOrElement) ? prepareElement(tagOrElement, context) : tagOrElement;
 
     element.select = function (locator, labelOrValue) {
       var select = element.find(locator);
@@ -29,5 +35,6 @@ export default function (tagOrElement) {
 
     $rootScope.$digest();
   });
+
   return element;
 }
