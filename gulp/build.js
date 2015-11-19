@@ -8,7 +8,7 @@ var $ = require('gulp-load-plugins')({
 
 module.exports = function (options) {
   gulp.task('build', function () {
-    series('ts:compile', 'browserify', 'inject');
+    series('ts:compile', 'browserify', 'inject', 'assets');
   });
 
   gulp.task('inject', function () {
@@ -35,7 +35,12 @@ module.exports = function (options) {
   });
 
   gulp.task('html', function () {
-    return gulp.src(options.globs.html)
+    return gulp.src(options.globs.html, {base: 'src'})
+      .pipe(gulp.dest(options.paths.tmp));
+  });
+
+  gulp.task('assets', function () {
+    return gulp.src(options.globs.assets, {base: 'src'})
       .pipe(gulp.dest(options.paths.tmp));
   });
 };

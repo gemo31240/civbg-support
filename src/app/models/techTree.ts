@@ -50,11 +50,6 @@ export default class TechTree {
     if (tech) {
       this.get(level).push(tech);
     }
-    //var length = _.max(_.chain(this.player.tech[level]).keys().map((k) => +k).value().concat([-1]));
-    //if (!this.player.tech[level]) {
-    //  this.player.tech[level] = {};
-    //}
-    //this.player.tech[level][length + 1] = techId;
   }
 
   public removeTech(techId: string) {

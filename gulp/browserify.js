@@ -10,14 +10,6 @@ var sourcemaps = require('gulp-sourcemaps');
 var _ = require('lodash');
 var $ = require('gulp-load-plugins')();
 
-//var customOpts = {
-//  entries: ['.tmp/app.js'],
-//  debug: true
-//};
-//var opts = _.assign({}, watchify.args, customOpts);
-//console.log(opts);
-//var b = watchify(browserify(opts));
-
 module.exports = function(options) {
   var browserifyOptions = {
     entries: '.tmp/app.js',

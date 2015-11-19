@@ -10,10 +10,18 @@ export class PlayerConfig {
   }
 }
 
+export class ArmsInfo {
+  public sword: number = 1;
+  public cannon: number = 1;
+  public cavalry: number = 1;
+  public airforce: number = 0;
+}
+
 export default class Player {
   public civilizationId: string;
   public color: string;
-  public techTree: TechTree;
+  public techTree: TechTree = new TechTree();
+  public armsInfo: ArmsInfo = new ArmsInfo();
 
   public get civilization() {
     return Civilization.find(this.civilizationId);
@@ -22,8 +30,6 @@ export default class Player {
   constructor(config: PlayerConfig) {
     this.civilizationId = config.civilizationId;
     this.color = config.color;
-    this.techTree = new TechTree();
-
     this.studyBeginningTech();
   }
 

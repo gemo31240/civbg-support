@@ -2,7 +2,6 @@
 
 import * as _ from 'lodash';
 import {directive, inject} from '../../../app.decorators';
-import PlayerRepository from '../../models/playerRepository';
 import Tech, {LEVELS} from '../../models/tech';
 import TechTree from '../../models/techTree';
 
@@ -20,17 +19,13 @@ class TechTreeComponent implements ng.IDirective {
   templateUrl = 'app/components/techTreeView/techTreeView.html';
 }
 
-@inject('$window', PlayerRepository.name)
+@inject('$window')
 export class TechTreeController {
   public LEVELS = REVERSED_LEVELS;
 
   public tree: TechTree;
 
-  constructor(private $window: ng.IWindowService,
-              private playerRepository: PlayerRepository) {
-    //this.levels = ;
-    //
-    this.initPlayerTechTree();
+  constructor(private $window: ng.IWindowService) {
   }
 
   private initPlayerTechTree() {
@@ -39,11 +34,6 @@ export class TechTreeController {
     //}
     //this.player.tech.keep = true;
   }
-
-  //
-  //toName(techId) {
-  //  return _.find(this.Tech, (tech) => tech.id === techId).name;
-  //}
 
   public isTechAddable(level: string) {
     return this.tree.isAddable(level);

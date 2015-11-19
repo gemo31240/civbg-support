@@ -16,8 +16,8 @@ module.exports = function (options) {
       series('ts:compile', 'browserify', 'inject');
     });
 
-    watch(options.globs.html, function(){
-      series('styles', 'build','html');
+    watch(options.globs.html, function () {
+      series('styles', 'build', 'html');
     });
 
     watch(options.globs.sass, function () {

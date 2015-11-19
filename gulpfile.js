@@ -12,12 +12,9 @@ var paths = {
 var globs = {
   sass: ['src/app/**/*.scss'],
   html: ['src/index.html', 'src/**/*.html'],
-  assets: 'src/assets/**/*.*',
+  assets: ['src/assets/**/*.*'],
   app: ['src/*.ts', 'src/app/**/*.ts', '!src/**/*.spec.ts'],
-  // karma typescript preprocessor generates a bunch of .ktp.ts which gets picked
-  // up by the watch, rinse and repeat
-  appWithDefinitions: ['typings/**/*.ts', 'src/*.ts', 'src/app/**/*.ts', '!src/**/*.spec.ts', '!src/app/**/*.ktp.*'],
-  integration: 'src/tests/integration/**/*.js',
+  appWithDefinitions: ['typings/**/*.ts', 'src/*.ts', 'src/app/**/*.ts', '!src/**/*.spec.ts'],
   index: 'src/index.html'
 };
 
