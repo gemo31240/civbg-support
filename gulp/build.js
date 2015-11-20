@@ -18,6 +18,7 @@ module.exports = function (options) {
     ], {read: false});
 
     var injectScripts = gulp.src([
+      options.paths.tmp + '/vendor.js',
       options.paths.tmp + '/bundle.js'
       //'!' + options.paths.src + '/app/**/*.spec.js',
       //'!' + options.paths.src + '/app/**/*.mock.js'
