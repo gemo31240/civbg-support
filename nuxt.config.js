@@ -33,6 +33,11 @@ module.exports = {
           exclude: /(node_modules)/
         })
       }
-    }
-  }
+    },
+    vendor: ['bootstrap-vue']
+  },
+  /**
+   * Plugins
+   */
+  plugins: ['~plugins/bootstrap-vue']
 }
