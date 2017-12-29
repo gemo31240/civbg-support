@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <header>
     <b-navbar toggleable="md" type="dark" variant="info" :sticky="true">
       <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
       <b-navbar-brand href="#">CivBG Support</b-navbar-brand>
@@ -31,7 +31,7 @@
         <b-form-select id="fourth-color" v-model="selectedColors.fourth" :options="restColorsFor('fourth')"/>
       </b-form-group>
     </b-modal>
-  </div>
+  </header>
 </template>
 
 <script>
