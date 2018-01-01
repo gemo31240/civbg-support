@@ -13,7 +13,7 @@
   export default {
     computed: {
       isInGame () {
-        return !!this.$route.params.id
+        return this.$route.name === 'game' && !!Object.keys(this.$route.query).length > 0
       }
     },
     components: {

@@ -5,7 +5,7 @@
         CivBG Support
       </h1>
       <h2 class="subtitle">
-        manage players' tech-tree and display arms ranks
+        manage players' tech-tree
       </h2>
       <div class="buttons">
         <b-button size="lg" variant="primary" v-b-modal.newGameModal>
@@ -27,7 +27,7 @@
     methods: {
       async handleOk (colors) {
         const gameId = await this.startGame(colors)
-        this.$router.push({name: 'id', params: {id: gameId}})
+        this.$router.push(`game/?${gameId}`)
       },
       ...mapActions({
         startGame: START_GAME

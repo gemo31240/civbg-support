@@ -1,29 +1,18 @@
 module.exports = {
-  /*
-   ** Headers of the page
-   */
   head: {
-    title: 'civbg-support',
+    title: 'CivBG Support',
     meta: [
       {charset: 'utf-8'},
       {name: 'viewport', content: 'width=device-width, initial-scale=1'},
       {hid: 'description', name: 'description', content: 'Civilization Board Game tech-tree support'}
     ],
-    link: [
-      {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
-    ]
+    link: []
   },
-  /*
-   ** Customize the progress bar color
-   */
   loading: {color: '#3B8070'},
-  /*
-   ** Build configuration
-   */
+  router: {
+    base: '/civbg-support'
+  },
   build: {
-    /*
-     ** Run ESLint on save
-     */
     extend (config, ctx) {
       if (ctx.dev && ctx.isClient) {
         config.module.rules.push({
@@ -36,8 +25,5 @@ module.exports = {
     },
     vendor: ['bootstrap-vue', 'firebase', 'vuexfire']
   },
-  /**
-   * Plugins
-   */
   plugins: ['~plugins/bootstrap-vue', '~plugins/firebase']
 }

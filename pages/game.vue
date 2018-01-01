@@ -8,11 +8,9 @@
   import { LOAD_GAME } from '~/store/action-types'
 
   export default {
-    async asyncData ({params}) {
-      return {id: params.id}
-    },
     async created () {
-      const loaded = await this.loadGame(this.id)
+      const key = Object.keys(this.$route.query)[0]
+      const loaded = key && key.length > 0 && await this.loadGame(key)
       if (!loaded) {
         this.$router.replace('/')
       }
