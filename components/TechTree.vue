@@ -1,7 +1,7 @@
 <template>
-  <div class="tech-tree" :class="`tech-level1-${player.tree.first.length}`">
+  <div class="tech-tree" :class="`tech-level1-${count('first')}`">
     <ul v-for="level in TECH_LEVELS" class="tech-row" :class="`tech-${level}`">
-      <li v-for="techId in player.tree[level]" class="tech-list-item">
+      <li v-for="techId in techs(level)" class="tech-list-item">
         <a class="remove" @click="removeTech({player, techId})">&times;</a>
         <span class="tech-list-item-label">{{techName(techId)}}</span>
       </li>
@@ -14,13 +14,13 @@
         </b-select>
       </li>
     </ul>
-    {{selectedTech}}
   </div>
 </template>
 
 <script>
-  import Techs from '~/models/tech'
-  import { mapMutations } from 'vuex'
+  import Techs from '~/service/tech'
+  import { mapActions } from 'vuex'
+  import { ADD_TECH, REMOVE_TECH } from '~/store/action-types'
 
   const TECH_LEVELS = ['first', 'second', 'third', 'fourth']
 
@@ -32,21 +32,27 @@
       }
     },
     methods: {
+      count (level) {
+        return this.techs(level).length
+      },
+      techs (level) {
+        return `tree.${level}`.split('.').reduce((obj, attr) => obj[attr] || [], this.player)
+      },
       isAddable (level) {
         switch (level) {
           case 'fourth':
-            return this.player.tree.fourth.length < this.player.tree.third.length - 1
+            return this.count('fourth') < this.count('third') - 1
           case 'third':
-            return this.player.tree.third.length < this.player.tree.second.length - 1
+            return this.count('third') < this.count('second') - 1
           case 'second':
-            return this.player.tree.second.length < this.player.tree.first.length - 1
+            return this.count('second') < this.count('first') - 1
           default:
             return true
         }
       },
       remaining (level) {
         return Techs
-          .filter(tech => tech.level === level && !this.player.tree[level].includes(tech.id))
+          .filter(tech => tech.level === level && !this.techs(level).includes(tech.id))
           .map(tech => ({text: tech.name, value: tech.id}))
       },
       techName (techId) {
@@ -54,17 +60,17 @@
       },
       handleChange (level, techId) {
         if (techId && techId.length > 0) {
-          this.appendTech({player: this.player, level, techId})
+          this.addTech({player: this.player, level, techId})
           this.resetSelection()
         }
       },
       resetSelection () {
         this.$nextTick(() => { this.selectedTech = '' })
       },
-      ...mapMutations([
-        'appendTech',
-        'removeTech'
-      ])
+      ...mapActions({
+        addTech: ADD_TECH,
+        removeTech: REMOVE_TECH,
+      })
     },
     props: {
       player: {

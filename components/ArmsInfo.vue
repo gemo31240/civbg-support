@@ -1,7 +1,7 @@
 <template>
   <div class="arms-info">
-    <div v-for="(rank, type) in player.arms" class="arms-wrapper">
-      <arm-info :type="type" :rank="rank"/>
+    <div v-for="type in ARMS_ORDER" class="arms-wrapper">
+      <arm-info :type="type" :rank="player.arms[type]"/>
     </div>
   </div>
 </template>
@@ -9,9 +9,14 @@
 <script>
   import ArmInfo from '~/components/ArmInfo.vue'
 
+  const ARMS_ORDER = ['sword', 'cannon', 'cavalry', 'airforce']
+
   export default {
-    computed: {},
-    methods: {},
+    data () {
+      return {
+        ARMS_ORDER
+      }
+    },
     props: {
       player: {
         type: Object,

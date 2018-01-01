@@ -12,6 +12,7 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {
+    'no-debugger': 0,
     'comma-dangle': ['error', {
       'arrays': 'only-multiline',
       'objects': 'only-multiline',

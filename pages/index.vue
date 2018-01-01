@@ -4,15 +4,16 @@
 
 <script>
   import Players from '~/components/Players.vue'
-  import { mapMutations } from 'vuex'
+  import { mapActions } from 'vuex'
+  import { START_GAME } from '~/store/action-types'
 
   export default {
     mounted () {
-      this.start()
+      this.startGame()
     },
     methods: {
-      ...mapMutations({
-        start: 'start'
+      ...mapActions({
+        startGame: START_GAME
       })
     },
     components: {

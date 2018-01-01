@@ -9,7 +9,7 @@ const Techs = [
     moves: null,
     stack: null,
     coin: null,
-    culturecard: null
+    cultureCard: null
   },
   {
     id: '1-2',
@@ -18,10 +18,10 @@ const Techs = [
     politics: null,
     building: null,
     arms: null,
-    moves: '3マス',
+    moves: 3,
     stack: null,
     coin: null,
-    culturecard: null
+    cultureCard: null
   },
   {
     id: '1-3',
@@ -33,7 +33,7 @@ const Techs = [
     moves: null,
     stack: null,
     coin: null,
-    culturecard: null
+    cultureCard: null
   },
   {
     id: '1-4',
@@ -45,7 +45,7 @@ const Techs = [
     moves: null,
     stack: null,
     coin: null,
-    culturecard: null
+    cultureCard: null
   },
   {
     id: '1-5',
@@ -57,7 +57,7 @@ const Techs = [
     moves: null,
     stack: '3個',
     coin: null,
-    culturecard: null
+    cultureCard: null
   },
   {
     id: '1-6',
@@ -69,7 +69,7 @@ const Techs = [
     moves: null,
     stack: null,
     coin: null,
-    culturecard: null
+    cultureCard: null
   },
   {
     id: '1-7',
@@ -81,7 +81,7 @@ const Techs = [
     moves: null,
     stack: null,
     coin: null,
-    culturecard: null
+    cultureCard: null
   },
   {
     id: '1-8',
@@ -93,19 +93,19 @@ const Techs = [
     moves: null,
     stack: null,
     coin: null,
-    culturecard: null
+    cultureCard: null
   },
   {
     id: '1-9',
     name: '陶器',
     level: 'first',
     politics: null,
-    building: '穀物庫 ',
+    building: '穀物庫',
     arms: null,
     moves: null,
     stack: null,
     coin: null,
-    culturecard: '上限+1',
+    cultureCard: 1,
   },
   {
     id: '1-10',
@@ -117,7 +117,7 @@ const Techs = [
     moves: null,
     stack: null,
     coin: null,
-    culturecard: null
+    cultureCard: null
   },
   {
     id: '1-11',
@@ -129,7 +129,7 @@ const Techs = [
     moves: null,
     stack: null,
     coin: null,
-    culturecard: null
+    cultureCard: null
   },
   {
     id: '1-12',
@@ -141,7 +141,7 @@ const Techs = [
     moves: null,
     stack: null,
     coin: null,
-    culturecard: null
+    cultureCard: null
   },
   {
     id: '2-1',
@@ -153,7 +153,7 @@ const Techs = [
     moves: null,
     stack: ' 4個',
     coin: null,
-    culturecard: null
+    cultureCard: null
   },
   {
     id: '2-2',
@@ -165,7 +165,7 @@ const Techs = [
     moves: null,
     stack: null,
     coin: null,
-    culturecard: null
+    cultureCard: null
   },
   {
     id: '2-3',
@@ -176,8 +176,8 @@ const Techs = [
     arms: null,
     moves: null,
     stack: null,
-    coin: 'コイン+1',
-    culturecard: '上限+1',
+    coin: 1,
+    cultureCard: 1,
   },
   {
     id: '2-4',
@@ -188,8 +188,8 @@ const Techs = [
     arms: null,
     moves: null,
     stack: null,
-    coin: 'コイン+1',
-    culturecard: null
+    coin: 1,
+    cultureCard: null
   },
   {
     id: '2-5',
@@ -203,7 +203,7 @@ const Techs = [
     moves: null,
     stack: null,
     coin: null,
-    culturecard: null
+    cultureCard: null
   },
   {
     id: '2-6',
@@ -215,7 +215,7 @@ const Techs = [
     moves: null,
     stack: null,
     coin: null,
-    culturecard: null
+    cultureCard: null
   },
   {
     id: '2-7',
@@ -227,7 +227,7 @@ const Techs = [
     moves: null,
     stack: null,
     coin: null,
-    culturecard: null
+    cultureCard: null
   },
   {
     id: '2-8',
@@ -239,7 +239,7 @@ const Techs = [
     moves: null,
     stack: null,
     coin: null,
-    culturecard: null
+    cultureCard: null
   },
   {
     id: '2-9',
@@ -251,7 +251,7 @@ const Techs = [
     moves: null,
     stack: null,
     coin: null,
-    culturecard: null
+    cultureCard: null
   },
   {
     id: '2-10',
@@ -265,7 +265,7 @@ const Techs = [
     moves: null,
     stack: null,
     coin: null,
-    culturecard: null
+    cultureCard: null
   },
   {
     id: '2-11',
@@ -274,10 +274,10 @@ const Techs = [
     politics: null,
     building: null,
     arms: null,
-    moves: '4マス',
+    moves: 4,
     stack: null,
     coin: null,
-    culturecard: null
+    cultureCard: null
   },
   {
     id: '2-12',
@@ -293,7 +293,7 @@ const Techs = [
     moves: null,
     stack: null,
     coin: null,
-    culturecard: null
+    cultureCard: null
   },
   {
     id: '2-13',
@@ -307,7 +307,7 @@ const Techs = [
     moves: null,
     stack: null,
     coin: null,
-    culturecard: null
+    cultureCard: null
   },
   {
     id: '3-1',
@@ -321,7 +321,7 @@ const Techs = [
     moves: null,
     stack: null,
     coin: null,
-    culturecard: null
+    cultureCard: null
   },
   {
     id: '3-2',
@@ -333,7 +333,7 @@ const Techs = [
     moves: null,
     stack: null,
     coin: null,
-    culturecard: null
+    cultureCard: null
   },
   {
     id: '3-3',
@@ -345,7 +345,7 @@ const Techs = [
     moves: null,
     stack: null,
     coin: null,
-    culturecard: null
+    cultureCard: null
   },
   {
     id: '3-4',
@@ -357,7 +357,7 @@ const Techs = [
     moves: null,
     stack: null,
     coin: null,
-    culturecard: null
+    cultureCard: null
   },
   {
     id: '3-5',
@@ -369,7 +369,7 @@ const Techs = [
     moves: null,
     stack: null,
     coin: null,
-    culturecard: null
+    cultureCard: null
   },
   {
     id: '3-6',
@@ -381,7 +381,7 @@ const Techs = [
     moves: null,
     stack: null,
     coin: null,
-    culturecard: null
+    cultureCard: null
   },
   {
     id: '3-7',
@@ -390,10 +390,10 @@ const Techs = [
     politics: null,
     building: null,
     arms: null,
-    moves: '5マス',
+    moves: 5,
     stack: null,
     coin: null,
-    culturecard: null
+    cultureCard: null
   },
   {
     id: '3-8',
@@ -405,7 +405,7 @@ const Techs = [
     moves: null,
     stack: null,
     coin: null,
-    culturecard: '上限+1',
+    cultureCard: 1,
   },
   {
     id: '3-9',
@@ -417,7 +417,7 @@ const Techs = [
     moves: null,
     stack: '5個',
     coin: null,
-    culturecard: null
+    cultureCard: null
   },
   {
     id: '3-10',
@@ -431,7 +431,7 @@ const Techs = [
     moves: null,
     stack: null,
     coin: null,
-    culturecard: null
+    cultureCard: null
   },
   {
     id: '3-11',
@@ -444,8 +444,8 @@ const Techs = [
     },
     moves: null,
     stack: null,
-    coin: 'コイン+1',
-    culturecard: null
+    coin: 1,
+    cultureCard: null
   },
   {
     id: '4-1',
@@ -459,7 +459,7 @@ const Techs = [
     moves: null,
     stack: '6個',
     coin: null,
-    culturecard: null
+    cultureCard: null
   },
   {
     id: '4-2',
@@ -471,7 +471,7 @@ const Techs = [
     moves: null,
     stack: null,
     coin: null,
-    culturecard: null
+    cultureCard: null
   },
   {
     id: '4-3',
@@ -482,8 +482,8 @@ const Techs = [
     arms: null,
     moves: null,
     stack: null,
-    coin: 'コイン+1',
-    culturecard: null
+    coin: 1,
+    cultureCard: null
   },
   {
     id: '4-4',
@@ -497,7 +497,7 @@ const Techs = [
     moves: null,
     stack: null,
     coin: null,
-    culturecard: null
+    cultureCard: null
   },
   {
     id: '4-5',
@@ -511,7 +511,7 @@ const Techs = [
     moves: null,
     stack: null,
     coin: null,
-    culturecard: null
+    cultureCard: null
   },
   {
     id: '4-6',
@@ -522,10 +522,10 @@ const Techs = [
     arms: {
       airforce: 1
     },
-    moves: '6マス',
+    moves: 6,
     stack: null,
     coin: null,
-    culturecard: null
+    cultureCard: null
   },
   {
     id: '4-7',
@@ -537,7 +537,7 @@ const Techs = [
     moves: null,
     stack: null,
     coin: null,
-    culturecard: null
+    cultureCard: null
   },
   {
     id: '4-8',
@@ -549,7 +549,7 @@ const Techs = [
     moves: null,
     stack: null,
     coin: null,
-    culturecard: null
+    cultureCard: null
   },
   {
     id: '5-1',
@@ -561,7 +561,7 @@ const Techs = [
     moves: null,
     stack: null,
     coin: null,
-    culturecard: null
+    cultureCard: null
   },
   {
     id: 'newton',
@@ -573,7 +573,7 @@ const Techs = [
     moves: null,
     stack: null,
     coin: null,
-    culturecard: null
+    cultureCard: null
   }
 ]
 
