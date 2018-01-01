@@ -1,8 +1,6 @@
 <template>
   <section id="nuxt-content">
-    <header>
-      <NavBar :ingame="isInGame"/>
-    </header>
+    <NavBar :ingame="isInGame"/>
     <main>
       <nuxt/>
     </main>

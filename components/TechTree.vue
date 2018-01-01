@@ -1,6 +1,7 @@
 <template>
   <div class="tech-tree" :class="`tech-level1-${count('first')}`">
     <ul v-for="level in TECH_LEVELS" class="tech-row" :class="`tech-${level}`">
+      <li class="tech-row-spacer"/>
       <li v-for="techId in tree[level]" class="tech-list-item">
         <a class="remove" @click="removeTech({player, techId})">&times;</a>
         <span class="tech-list-item-label">{{techName(techId)}}</span>
@@ -99,17 +100,13 @@
 </script>
 
 <style lang="stylus" scoped>
+  item-width = 15%
+
   .tech-tree
     width: 100%
     height: 100%
     display: flex
     flex-direction: column-reverse
-
-    @media screen and (max-width: 1024px)
-      font-size: 1em
-
-    @media screen and (min-width: 1025px)
-      font-size: 1.5em
 
     .tech-row
       height: 25%
@@ -121,50 +118,84 @@
       overflow: hidden
       list-style: none
 
-      .tech-list-item
-        height: 100%
-        border: solid 2px #66512c
-        border-radius: 5px
-        background-color: white
-        width: 15%
-        overflow: hidden
-        position: relative
-        display: flex
-        justify-content: center
-        align-items: center
+    .tech-list-item
+      width: item-width
+      height: 100%
+      border: solid 2px #66512c
+      border-radius: 5px
+      box-sizing: border-box
+      background-color: white
+      font-size: 1.3rem
+      overflow: hidden
+      position: relative
+      display: flex
+      justify-content: center
+      align-items: center
 
-        .remove
-          position: absolute
-          top: 2px
-          right: 2px
-          color: #c23c3f
-          display: none
-          cursor: pointer
-          font-weight: bold
-          padding: .5rem
-          line-height: 1rem
+      @media screen and (max-width: 1024px)
+        font-size: 1rem
 
-        &:hover .remove
+      .remove
+        position: absolute
+        top: 2px
+        right: 2px
+        color: #c23c3f
+        display: none
+        cursor: pointer
+        font-weight: bold
+        padding: .5rem
+        line-height: 1rem
+        @media screen and (max-width: 1024px)
           display: block
 
-        .tech-list-item-label
-          color: #333
-          text-align: center
+      &:hover .remove
+        display: block
 
-        .tech-list-item-wrapper
-          width: 100%
-          height: 100%
-          text-align: center
+    .tech-list-item-label
+      color: #333
+      text-align: center
 
-      .append-tech
-        overflow: visible
-        border: dotted 2px rgba(217, 174, 32, 0.65)
+    .tech-list-item-wrapper
+      width: 100%
+      height: 100%
+      text-align: center
 
-        select
-          appearance: none
-          width: 100%
-          height: 100%
-          border-radius: 5px
-          text-align: center
-          font-size: 1.5rem
+    .append-tech
+      overflow: visible
+      border: dotted 2px rgba(217, 174, 32, 0.65)
+
+      select
+        appearance: none
+        width: 100%
+        height: 100%
+        border-radius: 5px
+        text-align: center
+        font-size: 1.5rem
+
+    .tech-second .tech-row-spacer
+      width: item-width * .5
+
+    .tech-third .tech-row-spacer
+      width: item-width
+
+    .tech-fourth .tech-row-spacer
+      width: item-width * 1.5
+
+  for count in 6 .. 13
+    .tech-level1-{count}
+      item-width = 15% - (count - 6 + 2)
+
+      .tech-list-item
+        width: item-width
+        if count > 8
+          font-size: 1.2rem
+
+      .tech-second .tech-row-spacer
+        width: item-width * .5
+
+      .tech-third .tech-row-spacer
+        width: item-width
+
+      .tech-fourth .tech-row-spacer
+        width: item-width * 1.5
 </style>

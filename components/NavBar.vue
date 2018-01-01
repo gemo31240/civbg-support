@@ -1,7 +1,7 @@
 <template>
-  <b-navbar toggleable="md" type="dark" variant="info" :sticky="true">
-    <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
+  <b-navbar toggleable="md" type="dark" variant="success" :sticky="true">
     <b-navbar-brand href="/">CivBG Support</b-navbar-brand>
+    <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
 
     <b-collapse is-nav id="nav_collapse" v-if="ingame">
       <b-navbar-nav>

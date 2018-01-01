@@ -35,10 +35,13 @@
     float: left
     width: 50%
     height: 50%
-    min-width: 400px
     border: solid 1px #dddddd
     position: relative
     background: #eee
+    @media screen and (max-width: 1024px)
+      height: 100%
+    @media screen and (max-width: 767px)
+      width: 100%
 
   .player-badge
     display: inline-block
@@ -88,6 +91,5 @@
     z-index: 100
 
   .tech-tree
-    margin-top: 30px
-    padding-bottom: 30px
+    padding-top: 50px
 </style>
