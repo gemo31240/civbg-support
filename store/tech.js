@@ -1,4 +1,6 @@
-const Techs = [
+export const NEWTON = 'newton'
+
+export const TECHS = [
   {
     id: '1-1',
     name: '海軍',
@@ -564,7 +566,7 @@ const Techs = [
     cultureCard: null
   },
   {
-    id: 'newton',
+    id: NEWTON,
     name: 'アイザック・ニュートン',
     level: 'extra',
     politics: null,
@@ -577,8 +579,6 @@ const Techs = [
   }
 ]
 
-export default Techs
-
 export function findTechById (techId) {
-  return Techs.find((tech) => techId === tech.id)
+  return TECHS.find((tech) => techId === tech.id)
 }

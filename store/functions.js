@@ -1,6 +1,6 @@
-import { findTechById } from '~/service/tech'
+import { NEWTON, findTechById } from './tech'
 
-export default function calcArmsRank (player) {
+export function calcArmsRank (player) {
   const tree = player.tree ? player.tree : {}
   return [tree.first, tree.second, tree.third, tree.fourth]
     .reduce((arms, techIds) => {
@@ -11,4 +11,10 @@ export default function calcArmsRank (player) {
       })
       return arms
     }, {sword: 1, cannon: 1, cavalry: 1, airforce: 0})
+}
+
+export function isNewtonUsed (players) {
+  return players.some(player => {
+    return Object.values(player.tree || {}).some(techs => techs.includes(NEWTON))
+  })
 }

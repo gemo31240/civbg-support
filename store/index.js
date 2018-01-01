@@ -1,31 +1,36 @@
 import { firebaseMutations, firebaseAction } from 'vuexfire'
-import calcArmsRank from './calcArmsRank'
+import { calcArmsRank, isNewtonUsed } from './functions'
 import db from '~/plugins/firebase'
-import { START_GAME, ADD_TECH, REMOVE_TECH } from './action-types'
+import { START_GAME, ADD_TECH, REMOVE_TECH, SET_PLAYERS_REF } from './action-types'
 
 const playersRef = db.ref('players')
 
 export const state = () => ({
   gameStarted: false,
-  players: []
+  players: [],
+  newtonUsed: false,
 })
 
 export const mutations = {
+  updateNewtonUsed (state) {
+    state.newtonUsed = isNewtonUsed(state.players)
+  },
+
   ...firebaseMutations
 }
 
 export const actions = {
-  [START_GAME]: firebaseAction(({bindFirebaseRef}) => {
-    bindFirebaseRef('players', playersRef, {wait: true})
+  [START_GAME] ({dispatch}) {
+    dispatch(SET_PLAYERS_REF)
     // playersRef.set([])
     // playersRef.push(new Player('RED'))
     // playersRef.push(new Player('GREEN'))
     // playersRef.push(new Player('YELLOW'))
     // playersRef.push(new Player('BLUE'))
-  }),
+  },
 
-  [ADD_TECH] (context, {player, level, techId}) {
-    playersRef.child(player['.key']).transaction((p) => {
+  async [ADD_TECH] ({commit}, {player, level, techId}) {
+    await playersRef.child(player['.key']).transaction((p) => {
       if (p) {
         p.tree = {first: [], second: [], third: [], fourth: [], ...p.tree}
         p.tree[level].push(techId)
@@ -33,9 +38,10 @@ export const actions = {
       }
       return p
     })
+    commit('updateNewtonUsed')
   },
 
-  [REMOVE_TECH] (context, {player, techId}) {
+  [REMOVE_TECH] ({commit}, {player, techId}) {
     playersRef.child(player['.key']).transaction((p) => {
       if (p && p.tree) {
         Object.keys(p.tree).forEach(level => {
@@ -45,7 +51,15 @@ export const actions = {
       }
       return p
     })
+    commit('updateNewtonUsed')
   },
+
+  [SET_PLAYERS_REF]: firebaseAction(({bindFirebaseRef, commit}) => {
+    bindFirebaseRef('players', playersRef, {
+      readyCallback: () => commit('updateNewtonUsed'),
+      wait: true
+    })
+  }),
 }
 
 // class Player {

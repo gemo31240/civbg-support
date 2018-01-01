@@ -18,8 +18,8 @@
 </template>
 
 <script>
-  import Techs from '~/service/tech'
-  import { mapActions } from 'vuex'
+  import { TECHS, NEWTON, findTechById } from '~/store/tech'
+  import { mapState, mapActions } from 'vuex'
   import { ADD_TECH, REMOVE_TECH } from '~/store/action-types'
 
   const TECH_LEVELS = ['first', 'second', 'third', 'fourth']
@@ -31,6 +31,9 @@
         selectedTech: ''
       }
     },
+    computed: mapState([
+      'newtonUsed'
+    ]),
     methods: {
       count (level) {
         return this.techs(level).length
@@ -51,12 +54,16 @@
         }
       },
       remaining (level) {
-        return Techs
+        let techs = TECHS
           .filter(tech => tech.level === level && !this.techs(level).includes(tech.id))
           .map(tech => ({text: tech.name, value: tech.id}))
+        if (!this.newtonUsed) {
+          techs.push({text: findTechById(NEWTON).name, value: NEWTON})
+        }
+        return techs
       },
       techName (techId) {
-        return (Techs.find(tech => tech.id === techId) || {}).name
+        return (TECHS.find(tech => tech.id === techId) || {}).name
       },
       handleChange (level, techId) {
         if (techId && techId.length > 0) {
