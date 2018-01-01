@@ -1,6 +1,7 @@
 import { firebaseMutations, firebaseAction } from 'vuexfire'
 import { calcArmsRank, isNewtonUsed } from './functions'
 import db from '~/plugins/firebase'
+import { SET_NEWTON_USED, ENABLE_TESLA_MODE, DISABLE_TESLA_MODE } from './mutation-types'
 import { START_GAME, ADD_TECH, REMOVE_TECH, SET_PLAYERS_REF } from './action-types'
 
 const playersRef = db.ref('players')
@@ -9,11 +10,20 @@ export const state = () => ({
   gameStarted: false,
   players: [],
   newtonUsed: false,
+  teslaMode: false,
 })
 
 export const mutations = {
-  updateNewtonUsed (state) {
+  [SET_NEWTON_USED] (state) {
     state.newtonUsed = isNewtonUsed(state.players)
+  },
+
+  [ENABLE_TESLA_MODE] (state) {
+    state.teslaMode = true
+  },
+
+  [DISABLE_TESLA_MODE] (state) {
+    state.teslaMode = false
   },
 
   ...firebaseMutations
@@ -38,7 +48,8 @@ export const actions = {
       }
       return p
     })
-    commit('updateNewtonUsed')
+    commit(SET_NEWTON_USED)
+    commit(DISABLE_TESLA_MODE)
   },
 
   [REMOVE_TECH] ({commit}, {player, techId}) {
@@ -51,12 +62,13 @@ export const actions = {
       }
       return p
     })
-    commit('updateNewtonUsed')
+    commit(SET_NEWTON_USED)
+    commit(DISABLE_TESLA_MODE)
   },
 
   [SET_PLAYERS_REF]: firebaseAction(({bindFirebaseRef, commit}) => {
     bindFirebaseRef('players', playersRef, {
-      readyCallback: () => commit('updateNewtonUsed'),
+      readyCallback: () => commit(SET_NEWTON_USED),
       wait: true
     })
   }),

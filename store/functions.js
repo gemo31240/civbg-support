@@ -2,7 +2,7 @@ import { NEWTON, findTechById } from './tech'
 
 export function calcArmsRank (player) {
   const tree = player.tree ? player.tree : {}
-  return [tree.first, tree.second, tree.third, tree.fourth]
+  return [tree.first || [], tree.second || [], tree.third || [], tree.fourth || []]
     .reduce((arms, techIds) => {
       techIds.map(findTechById).filter(tech => tech.arms).forEach((tech) => {
         Object.keys(tech.arms).forEach(key => {

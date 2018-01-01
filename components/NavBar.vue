@@ -7,6 +7,7 @@
       <b-collapse is-nav id="nav_collapse">
         <b-navbar-nav>
           <b-nav-item v-b-modal.newGameModal>New Game</b-nav-item>
+          <b-nav-item @click="toggleTeslaMode">テスラの効果を切り替える [{{teslaMode ? 'ON' : 'OFF'}}]</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -35,6 +36,9 @@
 </template>
 
 <script>
+  import { mapState, mapMutations } from 'vuex'
+  import { ENABLE_TESLA_MODE, DISABLE_TESLA_MODE } from '~/store/mutation-types'
+
   const COLORS = ['RED', 'GREEN', 'BLUE', 'YELLOW', 'PURPLE']
 
   export default {
@@ -51,7 +55,11 @@
     computed: {
       startable () {
         return Object.values(this.selectedColors).filter(c => c !== '').length < 2
-      }
+      },
+
+      ...mapState([
+        'teslaMode',
+      ])
     },
     methods: {
       restColorsFor (user) {
@@ -60,7 +68,19 @@
       },
       startGame () {
         console.log('Start game')
-      }
+      },
+      toggleTeslaMode () {
+        if (this.teslaMode) {
+          this.disableTeslaMode()
+        } else {
+          this.enableTeslaMode()
+        }
+      },
+
+      ...mapMutations({
+        enableTeslaMode: ENABLE_TESLA_MODE,
+        disableTeslaMode: DISABLE_TESLA_MODE
+      })
     }
   }
 </script>

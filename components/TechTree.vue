@@ -1,13 +1,13 @@
 <template>
   <div class="tech-tree" :class="`tech-level1-${count('first')}`">
     <ul v-for="level in TECH_LEVELS" class="tech-row" :class="`tech-${level}`">
-      <li v-for="techId in techs(level)" class="tech-list-item">
+      <li v-for="techId in tree[level]" class="tech-list-item">
         <a class="remove" @click="removeTech({player, techId})">&times;</a>
         <span class="tech-list-item-label">{{techName(techId)}}</span>
       </li>
 
       <li class="tech-list-item append-tech" v-if="isAddable(level)">
-        <b-select v-model="selectedTech" :options="remaining(level)" @change="handleChange(level, $event)">
+        <b-select v-model="selectedTech" :options="selectableTechs(level)" @change="handleChange(level, $event)">
           <template slot="first">
             <option value="" selected>&#45;&#45;&#45;&#45;</option>
           </template>
@@ -31,34 +31,44 @@
         selectedTech: ''
       }
     },
-    computed: mapState([
-      'newtonUsed'
-    ]),
+    computed: {
+      tree () {
+        return {first: [], second: [], third: [], fourth: [], ...this.player.tree}
+      },
+      ...mapState([
+        'newtonUsed',
+        'teslaMode',
+      ])
+    },
     methods: {
       count (level) {
-        return this.techs(level).length
-      },
-      techs (level) {
-        return `tree.${level}`.split('.').reduce((obj, attr) => obj[attr] || [], this.player)
+        return this.tree[level].length
       },
       isAddable (level) {
-        switch (level) {
-          case 'fourth':
-            return this.count('fourth') < this.count('third') - 1
-          case 'third':
-            return this.count('third') < this.count('second') - 1
-          case 'second':
-            return this.count('second') < this.count('first') - 1
-          default:
-            return true
+        const index = TECH_LEVELS.indexOf(level)
+        if (index > 0) {
+          const prevLevel = TECH_LEVELS[index - 1]
+          return this.count(level) < this.count(prevLevel) - 1
         }
+        return true
       },
-      remaining (level) {
-        let techs = TECHS
-          .filter(tech => tech.level === level && !this.techs(level).includes(tech.id))
+      remainingTechs (level) {
+        const learned = Object.values(this.tree).reduce((mem, techs) => mem.concat(techs), [])
+        return TECHS
+          .filter(tech => tech.level === level && !learned.includes(tech.id))
           .map(tech => ({text: tech.name, value: tech.id}))
+      },
+      selectableTechs (level) {
+        let techs = this.remainingTechs(level)
         if (!this.newtonUsed) {
           techs.push({text: findTechById(NEWTON).name, value: NEWTON})
+        }
+        if (this.teslaMode) {
+          const index = TECH_LEVELS.indexOf(level)
+          if (index >= 0 && index < 3) {
+            const nextLevel = TECH_LEVELS[index + 1]
+            techs = techs.concat(this.remainingTechs(nextLevel))
+          }
         }
         return techs
       },
