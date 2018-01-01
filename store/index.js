@@ -1,19 +1,23 @@
 import { firebaseMutations, firebaseAction } from 'vuexfire'
 import { calcArmsRank, isNewtonUsed } from './functions'
 import db from '~/plugins/firebase'
-import { SET_NEWTON_USED, ENABLE_TESLA_MODE, DISABLE_TESLA_MODE } from './mutation-types'
-import { START_GAME, ADD_TECH, REMOVE_TECH, SET_PLAYERS_REF } from './action-types'
+import { SET_GAME_ID, SET_NEWTON_USED, ENABLE_TESLA_MODE, DISABLE_TESLA_MODE } from './mutation-types'
+import { START_GAME, LOAD_GAME, ADD_TECH, REMOVE_TECH, SET_PLAYERS_REF } from './action-types'
 
-const playersRef = db.ref('players')
+const gamesRef = db.ref('games')
 
 export const state = () => ({
-  gameStarted: false,
+  gameId: null,
   players: [],
   newtonUsed: false,
   teslaMode: false,
 })
 
 export const mutations = {
+  [SET_GAME_ID] (state, gameId) {
+    state.gameId = gameId
+  },
+
   [SET_NEWTON_USED] (state) {
     state.newtonUsed = isNewtonUsed(state.players)
   },
@@ -30,16 +34,31 @@ export const mutations = {
 }
 
 export const actions = {
-  [START_GAME] ({dispatch}) {
-    dispatch(SET_PLAYERS_REF)
-    // playersRef.set([])
-    // playersRef.push(new Player('RED'))
-    // playersRef.push(new Player('GREEN'))
-    // playersRef.push(new Player('YELLOW'))
-    // playersRef.push(new Player('BLUE'))
+  async [START_GAME] ({commit, dispatch}, colors) {
+    const gameRef = gamesRef.push()
+    const playersRef = gameRef.child('players')
+    playersRef.set([])
+    colors.forEach(color => {
+      playersRef.push(new Player(color))
+    })
+    commit(SET_GAME_ID, gameRef.key)
+    return gameRef.key
   },
 
-  async [ADD_TECH] ({commit}, {player, level, techId}) {
+  async [LOAD_GAME] ({commit, dispatch}, gameKey) {
+    const gameRef = gamesRef.child(gameKey)
+    const gameSnapshot = await gameRef.once('value')
+    const game = gameSnapshot.val()
+    if (game && ('players' in game)) {
+      commit(SET_GAME_ID, gameRef.key)
+      dispatch(SET_PLAYERS_REF, gameRef.child('players'))
+      return true
+    }
+    return false
+  },
+
+  async [ADD_TECH] ({state, commit}, {player, level, techId}) {
+    const playersRef = gamesRef.child(state.gameId).child('players')
     await playersRef.child(player['.key']).transaction((p) => {
       if (p) {
         p.tree = {first: [], second: [], third: [], fourth: [], ...p.tree}
@@ -52,7 +71,8 @@ export const actions = {
     commit(DISABLE_TESLA_MODE)
   },
 
-  [REMOVE_TECH] ({commit}, {player, techId}) {
+  [REMOVE_TECH] ({state, commit}, {player, techId}) {
+    const playersRef = gamesRef.child(state.gameId).child('players')
     playersRef.child(player['.key']).transaction((p) => {
       if (p && p.tree) {
         Object.keys(p.tree).forEach(level => {
@@ -66,7 +86,7 @@ export const actions = {
     commit(DISABLE_TESLA_MODE)
   },
 
-  [SET_PLAYERS_REF]: firebaseAction(({bindFirebaseRef, commit}) => {
+  [SET_PLAYERS_REF]: firebaseAction(({bindFirebaseRef, commit}, playersRef) => {
     bindFirebaseRef('players', playersRef, {
       readyCallback: () => commit(SET_NEWTON_USED),
       wait: true
@@ -74,20 +94,20 @@ export const actions = {
   }),
 }
 
-// class Player {
-//   constructor (color) {
-//     this.color = color
-//     this.tree = {
-//       first: [],
-//       second: [],
-//       third: [],
-//       fourth: [],
-//     }
-//     this.arms = {
-//       sword: 1,
-//       cannon: 1,
-//       cavalry: 1,
-//       airforce: 0
-//     }
-//   }
-// }
+class Player {
+  constructor (color) {
+    this.color = color
+    this.tree = {
+      first: [],
+      second: [],
+      third: [],
+      fourth: [],
+    }
+    this.arms = {
+      sword: 1,
+      cannon: 1,
+      cavalry: 1,
+      airforce: 0
+    }
+  }
+}

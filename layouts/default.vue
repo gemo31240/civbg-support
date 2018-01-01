@@ -1,7 +1,11 @@
 <template>
   <section id="nuxt-content">
-    <NavBar/>
-    <nuxt/>
+    <header>
+      <NavBar :ingame="isInGame"/>
+    </header>
+    <main>
+      <nuxt/>
+    </main>
   </section>
 </template>
 
@@ -9,6 +13,11 @@
   import NavBar from '~/components/NavBar.vue'
 
   export default {
+    computed: {
+      isInGame () {
+        return !!this.$route.params.id
+      }
+    },
     components: {
       NavBar
     }
@@ -34,12 +43,12 @@
 
   #__nuxt, #nuxt-content {
     height: 100%;
+    position: relative;
   }
 
-/*
-  *, *:before, *:after {
-    box-sizing: border-box;
-    margin: 0;
+  main {
+    height: 100%;
+    margin-top: -56px;
+    padding-top: 56px;
   }
-*/
 </style>
